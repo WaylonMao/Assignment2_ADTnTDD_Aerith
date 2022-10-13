@@ -1,5 +1,6 @@
 package utilities;
-import Exception.EmptyQueueException;
+
+import exceptions.EmptyQueueException;
 
 /**
  * <p>
@@ -10,63 +11,61 @@ import Exception.EmptyQueueException;
  * </p>
  *
  * @param <E> The type of elements this list holds.
+ * @author Hoa Le, Weilong Mao, Chris Wang, Hu Peng
  */
 public interface QueueADT<E> {
 
 
     /**
-     *  Retrieves, but does not remove, the head of this queue.
-     *  Precondition  : The queue is not empty.
-     *  Postcondition : The element at the head of the queue is returned.
+     * Retrieves, but does not remove, the head of this queue.
+     * Precondition  : The queue is not empty.
+     * Postcondition : The element at the head of the queue is returned.
      *
-     *  @throws EmptyQueueException if the queue is empty
-     *  @return the element at the front of the queue
-     *         Null if the queue is empty
+     * @return the element at the front of the queue
+     * Null if the queue is empty
+     * @throws EmptyQueueException if the queue is empty
      */
-
-
     public E peek() throws EmptyQueueException;
 
     /**
-     *  Add one element to the rear of this queue.
-     *  Precondition  : The queue is not full.
-     *  Postcondition : the element has been added to the rear (tail/back) of the queue.
+     * Add one element to the rear of this queue.
+     * Precondition  : The queue is not full.
+     * Postcondition : the element has been added to the rear (tail/back) of the queue.
+     *
      * @param e the element to be added to the rear of this queue
      */
-
     public void enqueue(E e);
 
     /**
      * Remove and return the element at the front of this queue.
      * Precondition  : The queue is not empty.
      * Postcondition : The element at the front of the queue is removed and returned.
-     * @return the element at the front of this queue
      *
+     * @return the element at the front of this queue
      * @throws EmptyQueueException Throws an exception if
-     *                               the queue is empty before the operation.
+     *                             the queue is empty before the operation.
      */
-
     public E dequeue() throws EmptyQueueException;
 
     /**
      * Return number of element from this queue.
      * Precondition  : None.
      * Postcondition : return the number of elements in the queue.
+     *
      * @return the number of elements in this queue
      */
-
     public int size();
 
     /**
      * Return an iterator over the elements in this queue, in proper sequence.
      * Precondition  : None.
      * Postcondition : return an iterator over the elements in this queue, in proper sequence.
+     *
      * @return An iterator over the elements in this queue, in proper sequence.
-     * 			NB: The return is of type
-     * 			<code>linearUtilities.Iterator<E></code>,
-     * 			not <code>java.util.Iterator</code>.
+     * NB: The return is of type
+     * <code>linearUtilities.Iterator<E></code>,
+     * not <code>java.util.Iterator</code>.
      */
-
     public Iterator<E> iterator();
 
     public boolean isEmpty();
