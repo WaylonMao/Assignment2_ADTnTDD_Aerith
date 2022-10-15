@@ -113,7 +113,7 @@ public interface QueueADT<E> {
      *
      * @param copy The array which the elements of the queue are to be stored in.
      * @return An array with the elements of the queue.
-     * @throws NullPointerException if the specified array is null.
+     * @throws EmptyQueueException if the specified array is null.
      */
-    public E[] toArray(E[] copy) throws NullPointerException;
+    public E[] toArray(E[] copy) throws EmptyQueueException;
 }
