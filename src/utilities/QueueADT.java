@@ -68,13 +68,51 @@ public interface QueueADT<E> {
      */
     public Iterator<E> iterator();
 
+    /**
+     * Return true if this queue contains no elements.
+     * Precondition  : None.
+     * Postcondition : return true if the queue is empty.
+     *
+     * @return true if this queue is empty
+     */
     public boolean isEmpty();
 
+    /**
+     * dequeue all elements from this queue
+     * Precondition  : None.
+     * Postcondition : dequeue all elements from this queue.
+     */
     public void dequeueAll();
 
+    /**
+     * equals method to compare two queues for equality
+     * Precondition  : Both queues are not null.
+     * Postcondition : return true if the queue is equal to the other queue.
+     *
+     * @param  that the other queue
+     * @return true if the queue is equal to the other queue
+     */
     public boolean equals(StackADT<E> that);
 
+
+    /**
+     * Convert all the elements in the queue into an array and return it in proper sequence
+     * Precondition: The queue is not empty.
+     * Postcondition: The queue is converted into an array and returned.
+     *
+     * @return An array with the elements of the queue.
+     */
     public E[] toArray();
 
+    /**
+     * Returns an array containing all the elements in this queue in proper sequence.
+     * If the queue fits in the specified array, it is returned therein. Otherwise, a new array will be returned with
+     * the size of this queue.
+     * precondition: The queue is not empty.
+     * postcondition: Return an array with the elements of the queue.
+     *
+     * @param copy The array which the elements of the queue are to be stored in.
+     * @return An array with the elements of the queue.
+     */
     public E[] toArray(E[] copy);
 }
