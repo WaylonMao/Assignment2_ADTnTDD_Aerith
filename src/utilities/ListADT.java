@@ -24,7 +24,7 @@ public interface ListADT<E> extends Serializable
 	
 	
 	/**
-	 * Removes all of the elements from this list. This list will be empty after
+	 * Removes all the elements from this list. This list will be empty after
 	 * this call returns.
 	 */
 	public void clear();

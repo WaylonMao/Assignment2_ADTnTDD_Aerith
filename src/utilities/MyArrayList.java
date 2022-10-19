@@ -25,13 +25,6 @@ public class MyArrayList<E> implements ListADT<E> {
         myArrayList = (E[]) (new Object[arraySize]);
     }
 
-    // resize the array
-
-    private void checkIntegrity() {
-        if (!integrityOK) {
-            throw new SecurityException("Array is not initialized properly");
-        }
-    }
     @Override
     public int size() {
 
@@ -78,42 +71,33 @@ public class MyArrayList<E> implements ListADT<E> {
      */
     @Override
     public boolean add(E toAdd) throws NullPointerException {
-        ensureCapacity();
-        myArrayList	[size + 1] = toAdd;
-        size++;
-        return false;
+        if(toAdd == null) {
+            throw new NullPointerException("The element is null");
+        }else {
+            ensureCapacity();
+            myArrayList[size++] = toAdd;
+            return true;
+        }
     }
 
     private void ensureCapacity() {
         int capacity = myArrayList.length -1;
         if(size >= capacity) {
             int newCapacity = 2 * capacity;
-            checkCapacity(newCapacity);
             myArrayList = Arrays.copyOf(myArrayList, newCapacity +1);
         }
     }
 
-    private void checkCapacity(int newCapacity) {
-        if(newCapacity > DEFAULT_CAPACITY) {
-            throw new IllegalStateException("Attempt to create a bag whose capacity exceeds allowed maximum of " + DEFAULT_CAPACITY);
-        }
-    }
 
     @Override
     public boolean addAll(ListADT<? extends E> toAdd) throws NullPointerException {
-        if(toAdd == null) {
-            throw new NullPointerException("The list is null");
-        }else {
-            for(int i = 0; i < toAdd.size(); i++) {
-                add(toAdd.get(i));
-            }
-            return true;
-        }
+
+        return false;
     }
 
     @Override
     public E get(int index) throws IndexOutOfBoundsException {
-        if(index < 0 || index > size) {
+        if(index < 0 || index > size-1) {
             throw new IndexOutOfBoundsException("The index is out of range");
         }else {
             return myArrayList[index];
@@ -123,51 +107,20 @@ public class MyArrayList<E> implements ListADT<E> {
 
     @Override
     public E remove(int index) throws IndexOutOfBoundsException {
-        if(index < 0 || index > size) {
-            throw new IndexOutOfBoundsException("The index is out of range");
-        }else {
-            E result = myArrayList[index];
-            for(int i = index; i < size; i++) {
-                myArrayList[i] = myArrayList[i+1];
-            }
-            size--;
-            return result;
-        }
+        // TODO Auto-generated method stub
+        return null;
     }
 
     @Override
     public E remove(E toRemove) throws NullPointerException {
-        if(toRemove == null) {
-            throw new NullPointerException("The element is null");
-        }else {
-            int index = 0;
-            while(index < size && !toRemove.equals(myArrayList[index])) {
-                index++;
-            }
-            if(index < size) {
-                E result = myArrayList[index];
-                for(int i = index; i < size; i++) {
-                    myArrayList[i] = myArrayList[i+1];
-                }
-                size--;
-                return result;
-            }else {
-                throw new NoSuchElementException("The element is not in the list");
-            }
-        }
+        // TODO Auto-generated method stub
+        return null;
     }
 
     @Override
     public E set(int index, E toChange) throws NullPointerException, IndexOutOfBoundsException {
-        if(toChange == null) {
-            throw new NullPointerException("The element is null");
-        }else if(index < 0 || index > size) {
-            throw new IndexOutOfBoundsException("The index is out of range");
-        }else {
-            E result = myArrayList[index];
-            myArrayList[index] = toChange;
-            return result;
-        }
+        // TODO Auto-generated method stub
+        return null;
     }
 
     @Override
@@ -178,27 +131,34 @@ public class MyArrayList<E> implements ListADT<E> {
 
     @Override
     public boolean contains(E toFind) throws NullPointerException {
-        // TODO Auto-generated method stub
-        return false;
+        if (toFind == null) {
+            throw new NullPointerException("The element is null");
+        } else if (size == 0) {
+            throw new NoSuchElementException("The element is not in the list");
+        } else {
+            for (int i = 0; i < size; i++) {
+                if (myArrayList[i].equals(toFind)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
     }
 
     @Override
     public E[] toArray(E[] toHold) throws NullPointerException {
-        // TODO Auto-generated method stub
         return null;
     }
 
     @Override
     public Object[] toArray() {
-        // TODO Auto-generated method stub
-        return null;
+        return new Object[0];
     }
 
     @Override
     public Iterator<E> iterator() {
-        // TODO Auto-generated method stub
         return null;
     }
-
 
 }

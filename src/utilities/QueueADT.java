@@ -91,7 +91,7 @@ public interface QueueADT<E> {
      * @param that The other queue.
      * @return True if the queue is equal to the other queue.
      */
-    public boolean equals(StackADT<E> that);
+    public boolean equals(QueueADT<E> that);
 
 
     /**
@@ -115,4 +115,6 @@ public interface QueueADT<E> {
      * @throws NullPointerException If the specified array is null.
      */
     public E[] toArray(E[] copy) throws NullPointerException;
+
+
 }
