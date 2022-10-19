@@ -23,7 +23,7 @@ public interface StackADT<E> {
      * @param element The element to be added to the top of this stack.
      * @throws NullPointerException Throws an exception if the element is null.
      */
-    public void push(E element) throws EmptyStackException;
+    public void push(E element) throws NullPointerException;
 
     /**
      * Removes and returns the top element from this stack.
