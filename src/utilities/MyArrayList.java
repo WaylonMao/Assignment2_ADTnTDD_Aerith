@@ -89,11 +89,7 @@ public class MyArrayList<E> implements ListADT<E> {
     }
 
 
-    @Override
-    public boolean addAll(ListADT<? extends E> toAdd) throws NullPointerException {
 
-        return false;
-    }
 
     @Override
     public E get(int index) throws IndexOutOfBoundsException {
@@ -125,8 +121,7 @@ public class MyArrayList<E> implements ListADT<E> {
 
     @Override
     public boolean isEmpty() {
-        // TODO Auto-generated method stub
-        return false;
+       return size == 0;
     }
 
     @Override
@@ -144,6 +139,11 @@ public class MyArrayList<E> implements ListADT<E> {
             return false;
         }
 
+    }
+    @Override
+    public boolean addAll(ListADT<? extends E> toAdd) throws NullPointerException {
+
+        return false;
     }
 
     @Override
