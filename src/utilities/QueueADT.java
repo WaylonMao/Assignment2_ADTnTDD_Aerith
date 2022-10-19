@@ -17,33 +17,32 @@ public interface QueueADT<E> {
 
 
     /**
-     * Retrieves, but does not remove, the head of this queue.
+     * This method returns the element at the front of the queue without removing it.
      * Precondition  : The queue is not empty.
      * Postcondition : The element at the head of the queue is returned.
      *
-     * @return the element at the front of the queue
-     * Null if the queue is empty
-     * @throws EmptyQueueException if the queue is empty
+     * @return The element at the front of the queue.
+     * @throws EmptyQueueException If the queue is empty.
      */
     public E peek() throws EmptyQueueException;
 
     /**
      * Add one element to the rear of this queue.
      * Precondition  : The queue is not full.
-     * Postcondition : the element has been added to the rear (tail/back) of the queue.
+     * Postcondition : The element has been added to the rear (tail/back) of the queue.
      *
-     * @param e the element to be added to the rear of this queue
+     * @param e The element to be added to the rear of this queue.
+     * @throws NullPointerException If the element is null.
      */
-    public void enqueue(E e);
+    public void enqueue(E e) throws NullPointerException;
 
     /**
      * Remove and return the element at the front of this queue.
      * Precondition  : The queue is not empty.
      * Postcondition : The element at the front of the queue is removed and returned.
      *
-     * @return the element at the front of this queue
-     * @throws EmptyQueueException Throws an exception if
-     *                             the queue is empty before the operation.
+     * @return The element at the front of this queue.
+     * @throws EmptyQueueException Throws an exception if the queue is empty before the operation.
      */
     public E dequeue() throws EmptyQueueException;
 
@@ -52,14 +51,14 @@ public interface QueueADT<E> {
      * Precondition  : None.
      * Postcondition : return the number of elements in the queue.
      *
-     * @return the number of elements in this queue
+     * @return The number of elements in this queue
      */
     public int size();
 
     /**
      * Return an iterator over the elements in this queue, in proper sequence.
      * Precondition  : None.
-     * Postcondition : return an iterator over the elements in this queue, in proper sequence.
+     * Postcondition : Return an iterator over the elements in this queue, in proper sequence.
      *
      * @return An iterator over the elements in this queue, in proper sequence.
      * NB: The return is of type
@@ -71,32 +70,32 @@ public interface QueueADT<E> {
     /**
      * Return true if this queue contains no elements.
      * Precondition  : None.
-     * Postcondition : return true if the queue is empty.
+     * Postcondition : Return true if the queue is empty.
      *
-     * @return true if this queue is empty
+     * @return True if this queue is empty.
      */
     public boolean isEmpty();
 
     /**
-     * dequeue all elements from this queue
+     * Dequeue all elements from this queue.
      * Precondition  : None.
-     * Postcondition : dequeue all elements from this queue.
+     * Postcondition : Dequeue all elements from this queue.
      */
     public void dequeueAll();
 
     /**
-     * equals method to compare two queues for equality
+     * Equals method to compare two queues for equality.
      * Precondition  : Both queues are not null.
-     * Postcondition : return true if the queue is equal to the other queue.
+     * Postcondition : Return true if the queue is equal to the other queue.
      *
-     * @param  that the other queue
-     * @return true if the queue is equal to the other queue
+     * @param that The other queue.
+     * @return True if the queue is equal to the other queue.
      */
     public boolean equals(StackADT<E> that);
 
 
     /**
-     * Convert all the elements in the queue into an array and return it in proper sequence
+     * Convert all the elements in the queue into an array and return it in proper sequence.
      * Precondition: The queue is not empty.
      * Postcondition: The queue is converted into an array and returned.
      *
@@ -108,12 +107,12 @@ public interface QueueADT<E> {
      * Returns an array containing all the elements in this queue in proper sequence.
      * If the queue fits in the specified array, it is returned therein. Otherwise, a new array will be returned with
      * the size of this queue.
-     * precondition: The queue is not empty.
-     * postcondition: Return an array with the elements of the queue.
+     * Precondition: The queue is not empty.
+     * Postcondition: Return an array with the elements of the queue.
      *
      * @param copy The array which the elements of the queue are to be stored in.
      * @return An array with the elements of the queue.
-     * @throws EmptyQueueException if the specified array is null.
+     * @throws NullPointerException If the specified array is null.
      */
-    public E[] toArray(E[] copy) throws EmptyQueueException;
+    public E[] toArray(E[] copy) throws NullPointerException;
 }

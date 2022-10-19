@@ -101,8 +101,14 @@ public class MyArrayList<E> implements ListADT<E> {
 
     @Override
     public boolean addAll(ListADT<? extends E> toAdd) throws NullPointerException {
-
-        return false;
+        if(toAdd == null) {
+            throw new NullPointerException("The list is null");
+        }else {
+            for(int i = 0; i < toAdd.size(); i++) {
+                add(toAdd.get(i));
+            }
+            return true;
+        }
     }
 
     @Override
@@ -117,20 +123,51 @@ public class MyArrayList<E> implements ListADT<E> {
 
     @Override
     public E remove(int index) throws IndexOutOfBoundsException {
-        // TODO Auto-generated method stub
-        return null;
+        if(index < 0 || index > size) {
+            throw new IndexOutOfBoundsException("The index is out of range");
+        }else {
+            E result = myArrayList[index];
+            for(int i = index; i < size; i++) {
+                myArrayList[i] = myArrayList[i+1];
+            }
+            size--;
+            return result;
+        }
     }
 
     @Override
     public E remove(E toRemove) throws NullPointerException {
-        // TODO Auto-generated method stub
-        return null;
+        if(toRemove == null) {
+            throw new NullPointerException("The element is null");
+        }else {
+            int index = 0;
+            while(index < size && !toRemove.equals(myArrayList[index])) {
+                index++;
+            }
+            if(index < size) {
+                E result = myArrayList[index];
+                for(int i = index; i < size; i++) {
+                    myArrayList[i] = myArrayList[i+1];
+                }
+                size--;
+                return result;
+            }else {
+                throw new NoSuchElementException("The element is not in the list");
+            }
+        }
     }
 
     @Override
     public E set(int index, E toChange) throws NullPointerException, IndexOutOfBoundsException {
-        // TODO Auto-generated method stub
-        return null;
+        if(toChange == null) {
+            throw new NullPointerException("The element is null");
+        }else if(index < 0 || index > size) {
+            throw new IndexOutOfBoundsException("The index is out of range");
+        }else {
+            E result = myArrayList[index];
+            myArrayList[index] = toChange;
+            return result;
+        }
     }
 
     @Override

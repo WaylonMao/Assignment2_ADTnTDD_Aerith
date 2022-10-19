@@ -15,124 +15,128 @@ import exceptions.EmptyStackException;
  */
 public interface StackADT<E> {
 
-	/**
-	 * Adds one element to the top of this stack. 
-	 * Precondition: The stack is not full. 
-	 * Postcondition: The element has been added to the top of the stack.
-	 * 
-	 * @param element the element to be added to the top of this stack.
-	 * @throws NullPointerException Throws an exception if the element is null.
-	 */
-	public void push(E element) throws NullPointerException;
-
-	/**
-	 * Removes and returns the top element from this stack. Precondition: The stack
-	 * is not empty. 
-	 * Postcondition: The top element has been return and removed from this stack.
-	 *
-	 * @return the element removed from the top of this stack
-	 * @throws EmptyStackException if this stack is empty
-	 */
-	public E pop() throws EmptyStackException;
-
-	/**
-	 * Returns without removing the top element of this stack. 
-	 * Precondition: The stack is not empty. 
-	 * Postcondition: Returns the first element in this stack.
-	 * @return the first element in this stack.
-     * @throws EmptyStackException if this stack is empty
+    /**
+     * Adds one element to the top of this stack.
+     * Precondition: The stack is not full.
+     * Postcondition: The element has been added to the top of the stack.
+     *
+     * @param element The element to be added to the top of this stack.
+     * @throws NullPointerException Throws an exception if the element is null.
      */
-	public E peek() throws EmptyStackException;
+    public void push(E element) throws NullPointerException;
 
-	/**
-	 * Returns true if this stack contains no elements. 
-	 * Precondition: None
-	 * Postcondition: Return true if the stack is empty.
-	 *
-	 * @return true if this stack is empty
-	 */
-	public boolean isEmpty();
+    /**
+     * Removes and returns the top element from this stack.
+     * Precondition: The stack is not empty.
+     * Postcondition: The top element has been return and removed from this stack.
+     *
+     * @return The element removed from the top of this stack.
+     * @throws EmptyStackException if this stack is empty.
+     */
+    public E pop() throws EmptyStackException;
 
-	/**
-	 * Returns the number of elements in this stack. 
-	 * Precondition: None.
-	 * Postcondition: Return the number of elements in the stack.
-	 *
-	 * @return the integer representation of the size of this stack.
-	 */
-	public int size();
+    /**
+     * Returns without removing the top element of this stack.
+     * Precondition: The stack is not empty.
+     * Postcondition: Returns the first element in this stack.
+     *
+     * @return The first element in this stack.
+     * @throws EmptyStackException if this stack is empty.
+     */
+    public E peek() throws EmptyStackException;
 
-	/**
-	 * Returns the set of elements into the Iterator stack. 
-	 * Precondition: The stack is not empty.  
-	 * Postcondition: Returns the Iterator stack containing elements.
-	 *
-	 * @return the Iterator stack containing elements.
-	 */
-	public Iterator<E> iterator() throws EmptyStackException;;
+    /**
+     * Returns true if this stack contains no elements.
+     * Precondition: None
+     * Postcondition: Return true if the stack is empty.
+     *
+     * @return True if this stack is empty
+     */
+    public boolean isEmpty();
 
-	/**
-	 * Compare to the element in the StackADT, Returns true if every element's
-	 * position and values equals to each other and vice versa. 
-	 * Precondition: None. 
-	 * Postcondition: Returns true if every element's position
-	 * and values equals to each other and vice versa.
-	 *
-	 * @param that the StackADT element to be compared.
-	 * @return true if every element's position and values equals to each other and
-	 *         vice versa.
-	 */
-	public boolean equals(StackADT<E> that);
+    /**
+     * Returns the number of elements in this stack.
+     * Precondition: None.
+     * Postcondition: Return the number of elements in the stack.
+     *
+     * @return The integer representation of the size of this stack.
+     */
+    public int size();
 
-	/**
-	 * Removes all the elements from this stack. This stack will be empty after this
-	 * call returns. precondition: None. postcondition: The stack is empty.
-	 */
-	public void clear();
+    /**
+     * Returns the set of elements into the Iterator stack.
+     * Precondition: None.
+     * Postcondition: Returns the Iterator stack containing elements.
+     *
+     * @return The Iterator stack containing elements.
+     */
+    public Iterator<E> iterator();
 
-	/**
-	 * Convert all the elements in the stack into an array and return it in proper
-	 * sequence (from top to bottom of the stack). 
-	 * Precondition: None. 
-	 * Postcondition: The stack is converted into an array and returned.
-	 *
-	 * @return An array with the elements of the stack.
-	 */
-	public E[] toArray();
+    /**
+     * Compare to the element in the StackADT, Returns true if every element's
+     * position and values equals to each other and vice versa.
+     * Precondition: None.
+     * Postcondition: Returns true if every element's position
+     * and values equals to each other and vice versa.
+     *
+     * @param that The StackADT element to be compared.
+     * @return True if every element's position and values equals to each other and vice versa.
+     */
+    public boolean equals(StackADT<E> that);
 
-	/**
-	 * Returns an array containing all the elements in this stack in proper sequence
-	 * (from top to bottom of the stack). If the stack fits in the specified array,
-	 * it is returned therein. Otherwise, a new array will be returned with the size
-	 * of this stack. 
-	 * Precondition: None. 
-	 * Postcondition: Return an array with the elements of the stack.
-	 *
-	 * @param copy The array which the elements of the stack are to be stored in.
-	 * @return An array with the elements of the stack.
-	 */
-	public E[] toArray(E[] copy);
+    /**
+     * Removes all the elements from this stack. This stack will be empty after this call returns.
+     * Precondition: None.
+     * Postcondition: The stack is empty.
+     */
+    public void clear();
 
-	/**
-	 * Search the stack for the element and return the position of the element. The
-	 * top of the stack is position 1. 
-	 * Precondition: None. 
-	 * Postcondition: Return the position of the element in the stack.
-	 *
-	 * @param element The element to be searched.
-	 * @return The position of the element in the stack.
-	 */
-	public int search(E element);
+    /**
+     * Convert all the elements in the stack into an array and return it in proper
+     * sequence (from top to bottom of the stack).
+     * Precondition: None.
+     * Postcondition: The stack is converted into an array and returned.
+     *
+     * @return An array with the elements of the stack.
+     */
+    public E[] toArray();
 
-	/**
-	 * Search the stack for the element, if there is an element in the stack that is
-	 * equals to the element passed as parameter then return true.
-	 * Precondition: None. 
-	 * Postcondition: Return true if the element is in the stack.
-	 *
-	 * @param element The element to be searched.
-	 * @return True if the element is in the stack.
-	 */
-	public boolean contains(E element);
+    /**
+     * Returns an array containing all the elements in this stack in proper sequence
+     * (from top to bottom of the stack). If the stack fits in the specified array,
+     * it is returned therein. Otherwise, a new array will be returned with the size
+     * of this stack.
+     * Precondition: None.
+     * Postcondition: Return an array with the elements of the stack.
+     *
+     * @param copy The array which the elements of the stack are to be stored in.
+     * @return An array with the elements of the stack.
+     * @throws NullPointerException If the specified array is null.
+     */
+    public E[] toArray(E[] copy) throws NullPointerException;
+
+    /**
+     * Search the stack for the element and return the position of the element. The
+     * top of the stack is position 1.
+     * Precondition: None.
+     * Postcondition: Return the position of the element in the stack.
+     *
+     * @param element The element to be searched.
+     * @return The position of the element in the stack.
+     * @throws NullPointerException Throws an exception if the element is null.
+     */
+    public int search(E element) throws NullPointerException;
+
+    /**
+     * Search the stack for the element, if there is an element in the stack that is
+     * equals to the element passed as parameter then return true.
+     * Precondition: None.
+     * Postcondition: Return true if the element is in the stack.
+     *
+     * @param element The element to be searched.
+     * @return True if the element is in the stack.
+     * @throws NullPointerException Throws an exception if the element is null.
+     */
+    public boolean contains(E element) throws NullPointerException;
 
 }
