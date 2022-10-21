@@ -374,7 +374,12 @@ public class MyArrayListTest {
      */
     @Test
     public void testSet() {
-        fail("Not yet implemented"); // TODO
+        int expected = 4;
+        list.add(one);
+        list.add(two);
+        int actual = list.set(1, 4);
+        assertEquals("Element added was not correct position",expected, actual);
+
     }
 
     /**

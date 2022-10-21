@@ -109,14 +109,21 @@ public class MyArrayList<E> implements ListADT<E> {
 
     @Override
     public E remove(E toRemove) throws NullPointerException {
-        // TODO Auto-generated method stub
+
         return null;
     }
 
     @Override
     public E set(int index, E toChange) throws NullPointerException, IndexOutOfBoundsException {
-        // TODO Auto-generated method stub
-        return null;
+        if(index < 0 || index > size-1) {
+            throw new IndexOutOfBoundsException("The index is out of range");
+        }else if(toChange == null) {
+            throw new NullPointerException("The element is null");
+        }else {
+            E oldElement = myArrayList[index];
+            myArrayList[index] = toChange;
+            return myArrayList[index];
+        }
     }
 
     @Override
