@@ -7,7 +7,10 @@ import static org.junit.Assert.*;
 
 import org.junit.*;
 
+import utilities.Iterator;
 import utilities.MyArrayList;
+
+import java.util.Arrays;
 
 /**
  * @author Hoa Le
@@ -357,8 +360,57 @@ public class MyArrayListTest {
      * Test method for {@link utilities.MyArrayList#remove(int)}.
      */
     @Test
-    public void testRemoveInt() {
-        fail("Not yet implemented"); // TODO
+    public void testRemoveInt_Correct() {
+        list.add(one);
+        list.add(two);
+        list.add(three);
+        list.add(four);
+        list.add(five);
+        //expected: 1,2,3,4,5
+        int expected = 3;
+        int actual = list.remove(2);
+        assertEquals("Element removed was not correct position",expected, actual);
+
+    }
+    @Test
+    public void testRemoveInt_CorrectHead() {
+        list.add(one);
+        list.add(two);
+        //expected: 1,2
+        int expected = 1;
+        int actual = list.remove(0);
+        assertEquals("Element removed was not correct position",expected, actual);
+
+    }
+    @Test
+    public void testRemoveInt_CorrectTail() {
+        list.add(one);
+        list.add(two);
+        //expected: 1,2
+        int expected = 2;
+        int actual = list.remove(1);
+        assertEquals("Element removed was not correct position",expected, actual);
+
+    }
+    @Test
+    public void testRemoveInt_IndexOutOfBoundsException_greaterThanSize() {
+        list.add(one);
+        list.add(two);
+        list.add(three);
+        try {
+            list.remove(3);
+            fail("IndexOutOfBoundsException was not thrown");
+        }catch(IndexOutOfBoundsException e) {
+            assertTrue(true);
+        }
+    }
+    @Test
+    public void testRemoveInt_IndexOutOfBoundsException_lessThanZero() {
+        list.add(one);
+        list.add(two);
+        list.add(three);
+        assertThrows(IndexOutOfBoundsException.class, () ->
+                list.remove(-1));
     }
 
     /**
@@ -366,7 +418,46 @@ public class MyArrayListTest {
      */
     @Test
     public void testRemoveE() {
-        fail("Not yet implemented"); // TODO
+        list.add(three);
+        list.add(two);
+
+        //expected: 3,2
+        int expected = 3;
+        int actual = list.remove(three);
+        assertEquals("Element removed was not correct position",expected, actual);
+    }
+    @Test
+    public void testRemoveE_Head() {
+        list.add(one);
+        list.add(two);
+        //expected: 1,2
+        int expected = 1;
+        int actual = list.remove(one);
+        assertEquals("Element removed was not correct position",expected, actual);
+
+    }
+    @Test
+    public void testRemoveE_Tail() {
+        list.add(one);
+        list.add(two);
+        //expected: 1,2
+        int expected = 2;
+        int actual = list.remove(two);
+        assertEquals("Element removed was not correct position",expected, actual);
+
+    }
+    @Test
+    public void testRemoveE_Null() {
+        list.add(one);
+        list.add(two);
+        list.add(three);
+        //expected: 1,2,3
+        try {
+            list.remove(null);
+            fail("NullPointerException was not thrown");
+        }   catch(NullPointerException e) {
+            assertTrue(true);
+        }
     }
 
     /**
@@ -377,7 +468,8 @@ public class MyArrayListTest {
         int expected = 4;
         list.add(one);
         list.add(two);
-        int actual = list.set(1, 4);
+        list.set(1, 4);
+        int actual = list.get(1);
         assertEquals("Element added was not correct position",expected, actual);
 
     }
@@ -402,7 +494,22 @@ public class MyArrayListTest {
      */
     @Test
     public void testToArrayEArray() {
-        fail("Not yet implemented"); // TODO
+        list.add(one);
+        list.add(two);
+        list.add(three);
+        Object[] expected = {1,2,3};
+        Object[] actual = list.toArray();
+        assertArrayEquals("Array is not correct",expected, actual);
+    }
+    @Test
+    public void testToArrayEArray_Null() {
+         try{
+           list.add(null);
+           list.toArray();
+           fail("NullPointerException was not thrown");
+       }    catch(NullPointerException e) {
+           assertTrue(true);
+       }
     }
 
     /**
@@ -410,7 +517,12 @@ public class MyArrayListTest {
      */
     @Test
     public void testToArray() {
-        fail("Not yet implemented"); // TODO
+        list.add(one);
+        list.add(two);
+        list.add(three);
+        Object[] expected = {1,2,3};
+        Object[] actual = list.toArray();
+        assertArrayEquals("Array is not correct",expected, actual);
     }
 
     /**
@@ -418,15 +530,14 @@ public class MyArrayListTest {
      */
     @Test
     public void testIterator() {
-        fail("Not yet implemented"); // TODO
+        list.add(one);
+        list.add(two);
+        list.add(three);
+        Iterator<Integer> it = list.iterator();
+        int expected = 1;
+        int actual = it.next();
+        assertEquals("Iterator is not correct",expected, actual);
     }
 
-    /**
-     * Test method for {@link java.lang.Object#equals(java.lang.Object)}.
-     */
-    @Test
-    public void testEquals() {
-        fail("Not yet implemented"); // TODO
-    }
 
 }

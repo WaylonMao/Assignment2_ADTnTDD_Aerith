@@ -19,7 +19,7 @@ public class MyArrayList<E> implements ListADT<E> {
 
 
     //Constructor
-    MyArrayList() {
+    public MyArrayList() {
         size = 0;
         myArrayList = (E[]) new Object[arraySize];
     }
@@ -219,5 +219,6 @@ public class MyArrayList<E> implements ListADT<E> {
             }
         };
     }
+
 
 }
