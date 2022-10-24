@@ -15,7 +15,7 @@ public class MyArrayList<E> implements ListADT<E> {
     private E[] myArrayList;
     private final int DEFAULT_CAPACITY = 10;
     private int arraySize = DEFAULT_CAPACITY;
-    private boolean integrityOK = false;
+
 
 
     //Constructor
@@ -191,8 +191,8 @@ public class MyArrayList<E> implements ListADT<E> {
     }
 
     @Override
-    public Object[] toArray() {
-        Object[] temp = new Object[size];
+    public E[] toArray() {
+        E[] temp = (E[]) new Object[size];
         for (int i = 0; i < size; i++) {
             temp[i] = myArrayList[i];
         }

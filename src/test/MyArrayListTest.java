@@ -10,7 +10,6 @@ import org.junit.*;
 import utilities.Iterator;
 import utilities.MyArrayList;
 
-import java.util.Arrays;
 
 /**
  * @author Hoa Le
@@ -195,34 +194,48 @@ public class MyArrayListTest {
      */
     @Test
     public void testAddE_ReturnArrayTrue() {
-        int expected = 3;
-        list.add(one);
-        list.add(two);
-        list.add(three);
-        //Expected: 1,2,3
-
+       list.add(one);
+       list.add(two);
+       list.add(three);
+        MyArrayList<Integer> list2 = new MyArrayList<Integer>();
+        list2.add(four);
+        list2.add(five);
+        list.addAll(list2);
+        int expected = 5;
         int actual = list.size();
-        assertEquals("A list contains a wrong elements",expected, actual);
+        assertEquals("Array was not added to the list",expected, actual);
+
+
+
     }
 
     @Test
     public void testAddE_NullPointerException() {
-        one = null;
-        try{
-            list.add(one);
-            fail("NullPointerException was not thrown");
-        }catch(NullPointerException e) {
-            assertTrue(true);
-        }
+         list.add(one);
+         list.add(two);
+         try {
+                list.addAll(null);
+                fail("NullPointerException was not thrown");
+            }catch(NullPointerException e) {
+                assertTrue(true);
+            }
+
 
     }
 
     @Test
     public void testAddE_ItemAddedCorrectly_OneElement() {
-        int expected = 1;
+        int expected = 4;
         list.add(one);
-        int actual = (list.get(0)).intValue();
+        list.add(two);
+        list.add(three);
+        MyArrayList<Integer> list2 = new MyArrayList<Integer>();
+        list2.add(four);
+        list.addAll(list2);
+        // Test element added to the end of the list
+        int actual = (list.get(3)).intValue();
         assertEquals("Element added was not correct position",expected, actual);
+
     }
 
     @Test
@@ -239,7 +252,9 @@ public class MyArrayListTest {
         list.add(five);
         //default size is 10
         //after adding 10 elements, the size should be 20
-        list.add(one);
+        MyArrayList<Integer> list2 = new MyArrayList<Integer>();
+        list2.add(four);
+        list.addAll(list2);
         int expected = 11;
         int actual = list.size();
         assertEquals("Element added was not correct position",expected, actual);
@@ -250,26 +265,29 @@ public class MyArrayListTest {
      */
     @Test
     public void testAddAll_ItemsAddedCorrectlyHead() {
-        int expected = 1;
-        list.add(one);
+        int expected = 2;
         list.add(two);
         list.add(three);
         list.add(four);
-        //Expected elements:    1,2,3,4
-        int actual = list.get(0).intValue();
-        System.out.println(list.get(0).intValue());
+        list.add(five);
+        MyArrayList<Integer> list2 = new MyArrayList<Integer>();
+        list2.add(one);
+        list.addAll(list2);
+        int actual = (list.get(0)).intValue();
         assertEquals("Element added was not correct position",expected, actual);
     }
 
     @Test
     public void testAddAll_ItemsAddedCorrectlyTail() {
-        int expected = 4;
-        list.add(one);
+        int expected = 1;
         list.add(two);
         list.add(three);
         list.add(four);
-        //Expected elements:    1,2,3,4
-        int actual = list.get(3);
+        list.add(five);
+        MyArrayList<Integer> list2 = new MyArrayList<Integer>();
+        list2.add(one);
+        list.addAll(list2);
+        int actual = (list.get(4)).intValue();
         assertEquals("Element added was not correct position",expected, actual);
     }
 
@@ -498,14 +516,17 @@ public class MyArrayListTest {
         list.add(two);
         list.add(three);
         Object[] expected = {1,2,3};
-        Object[] actual = list.toArray();
+        Object[] actual = new Integer[list.size()];
+        expected = list.toArray((Integer[]) actual);
         assertArrayEquals("Array is not correct",expected, actual);
     }
     @Test
     public void testToArrayEArray_Null() {
          try{
            list.add(null);
-           list.toArray();
+           Object [] expected = {null};
+           Object [] actual = new Integer[list.size()];
+           expected = list.toArray((Integer[]) actual);
            fail("NullPointerException was not thrown");
        }    catch(NullPointerException e) {
            assertTrue(true);
