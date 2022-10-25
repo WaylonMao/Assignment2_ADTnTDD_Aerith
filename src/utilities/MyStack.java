@@ -1,7 +1,7 @@
 package utilities;
 
-import java.util.Arrays;
 import java.util.EmptyStackException;
+import java.util.NoSuchElementException;
 
 /**
  * Class description:
@@ -16,39 +16,27 @@ public class MyStack<E> implements StackADT<E> {
 	 */
 	private static final long serialVersionUID = 1L;
 	private int size;
-	private E[] myStack;
-	private final int DEFAULT_CAPACITY = 10;
-	private int stackSize = DEFAULT_CAPACITY;
-	private boolean integrityOK = false;
+	private MyArrayList<E> myStack;
 
 	/**
 	 * Initializes the newly created MyStack
 	 */
 	public MyStack() {
+
+		myStack = new MyArrayList<E>();
 		size = 0;
-		myStack = (E[]) (new Object[stackSize]);
 
 	}
 
 	@Override
 	public void push(E toAdd) throws NullPointerException {
 		try {
-			ensureCapacity();
-			myStack[size + 1] = toAdd;
-			size++;
+			if (myStack.add(toAdd) == true) {
+				size++;
+			}
 
 		} catch (NullPointerException ex) {
 			System.out.println("The parameter being passed is of null value");
-		}
-
-	}
-
-	private void ensureCapacity() {
-
-		int capacity = myStack.length - 1;
-		if (size >= capacity) {
-			int newCapacity = 2 * capacity;
-			myStack = Arrays.copyOf(myStack, newCapacity + 1);
 		}
 
 	}
@@ -57,7 +45,8 @@ public class MyStack<E> implements StackADT<E> {
 	public E pop() throws EmptyStackException {
 		E element = null;
 		try {
-			element = myStack[size];
+			element = myStack.get(size);
+			myStack.remove(size);
 			size--;
 		} catch (EmptyStackException ex) {
 			System.out.println("This stack is empty");
@@ -70,7 +59,7 @@ public class MyStack<E> implements StackADT<E> {
 	public E peek() throws EmptyStackException {
 		E element = null;
 		try {
-			element = myStack[size];
+			element = myStack.get(size);
 		} catch (EmptyStackException ex) {
 			System.out.println("This stack is empty");
 		}
@@ -79,21 +68,13 @@ public class MyStack<E> implements StackADT<E> {
 
 	@Override
 	public void clear() {
-		for (int i = 1; i <= size; i++) {
-			myStack[i] = null;
-		}
+		myStack.clear();
 		size = 0;
 	}
 
 	@Override
 	public boolean isEmpty() {
-		boolean empty = true;
-		for (int i = size; i >= 1; i--) {
-			if (myStack[i] != null)
-				empty = false;
-		}
-
-		return empty;
+		return size == 0;
 	}
 
 	/**
@@ -105,16 +86,16 @@ public class MyStack<E> implements StackADT<E> {
 	 */
 	@Override
 	public Object[] toArray() {
-		Object[] newArray = new Object[size];
+		Object[] temp = new Object[size];
 		int i = 0;
 		int j = size;
 		while (i < size) {
-			newArray[i] = myStack[j];
+			temp[i] = myStack.get(j);
 			i++;
 			j--;
 		}
 
-		return newArray;
+		return temp;
 	}
 
 	@Override
@@ -125,7 +106,7 @@ public class MyStack<E> implements StackADT<E> {
 		try {
 
 			while (i < size) {
-				holder[i] = myStack[j];
+				holder[i] = myStack.get(j);
 				i++;
 				j--;
 			}
@@ -152,7 +133,7 @@ public class MyStack<E> implements StackADT<E> {
 			throw new NullPointerException("The parameter being passed is of null value");
 		} else {
 			for (int i = size; i >= 1; i--) {
-				if (myStack[i].equals(toFind)) {
+				if (myStack.get(i).equals(toFind)) {
 					containsElement = true;
 				}
 			}
@@ -181,7 +162,7 @@ public class MyStack<E> implements StackADT<E> {
 		int position = -1;
 		for (int i = size; i >= 1; i--) {
 			distance++;
-			if (myStack[i].equals(toFind)) {
+			if (myStack.get(i).equals(toFind)) {
 				position = distance;
 			}
 
@@ -191,13 +172,34 @@ public class MyStack<E> implements StackADT<E> {
 
 	@Override
 	public Iterator<E> iterator() {
+		return new Iterator<E>() {
+			private int index = 1;
 
-		return null;
+			@Override
+			public boolean hasNext() {
+				return index <= size;
+			}
+
+			@Override
+			public E next() {
+				if (!hasNext()) {
+					throw new NoSuchElementException("The element is not in the list");
+				} else {
+					return myStack.get(index++);
+				}
+			}
+		};
 	}
 
 	@Override
 	public boolean equals(StackADT<E> that) {
-		boolean isEqual = false;
+		boolean isEqual = true;
+		if (that.size() == this.size)
+			for (int i = size; i >= 1; i--) {
+				if (!that.pop().equals(myStack.get(i)))
+					isEqual = false;
+
+			}
 
 		return isEqual;
 	}
