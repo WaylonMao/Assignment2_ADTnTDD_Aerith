@@ -8,10 +8,11 @@ import java.util.NoSuchElementException;
 
 /**
  * @param <E>
- * @author levan
+ * @author Hoa Le, Weilong Mao, Hu Peng, Chris Wang
  */
-public class MyArrayList<E> implements ListADT<E> {
+public class MyArrayList<E> implements ListADT<E>,Iterator<E> {
     private int size;
+    private int index;
     private E[] myArrayList;
     private final int DEFAULT_CAPACITY = 10;
     private int arraySize = DEFAULT_CAPACITY;
@@ -21,6 +22,7 @@ public class MyArrayList<E> implements ListADT<E> {
     //Constructor
     public MyArrayList() {
         size = 0;
+        index = 0;
         myArrayList = (E[]) new Object[arraySize];
     }
 
@@ -33,6 +35,7 @@ public class MyArrayList<E> implements ListADT<E> {
     public void clear() {
         myArrayList = (E[]) new Object[arraySize];
         size = 0;
+        index = 0;
     }
 
     @Override
@@ -201,24 +204,20 @@ public class MyArrayList<E> implements ListADT<E> {
 
     @Override
     public Iterator<E> iterator() {
-        return new Iterator<E>() {
-            private int index = 0;
-
-            @Override
-            public boolean hasNext() {
-                return index < size;
-            }
-
-            @Override
-            public E next() {
-                if (!hasNext()) {
-                    throw new NoSuchElementException("The element is not in the list");
-                } else {
-                    return myArrayList[index++];
-                }
-            }
-        };
+        return this;
     }
 
+    @Override
+    public boolean hasNext() {
+        return (index< size&& myArrayList[index] != null);
+    }
 
+    @Override
+    public E next() throws NoSuchElementException {
+        if (!hasNext()) {
+            throw new NoSuchElementException("The element is not in the list");
+        } else {
+            return myArrayList[index++];
+        }
+    }
 }
