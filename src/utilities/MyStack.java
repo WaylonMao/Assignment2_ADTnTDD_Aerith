@@ -194,13 +194,12 @@ public class MyStack<E> implements StackADT<E> {
 	@Override
 	public boolean equals(StackADT<E> that) {
 		boolean isEqual = true;
-		if (that.size() == this.size)
+		if (that.size() == this.size) {
 			for (int i = size; i >= 1; i--) {
 				if (!that.pop().equals(myStack.get(i)))
 					isEqual = false;
-
 			}
-
+		}
 		return isEqual;
 	}
 
