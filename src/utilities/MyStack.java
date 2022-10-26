@@ -79,7 +79,7 @@ public class MyStack<E> implements StackADT<E> {
 
 	/**
 	 * Returns an array containing all of the elements in this list in proper
-	 * sequence. Obeys the general contract of the Collection.toArray method.
+	 * sequence. Obeys the general contract of the Collection.toArray method
 	 * 
 	 * @return an array containing all of the elements in this list in proper
 	 *         sequence.
