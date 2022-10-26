@@ -73,7 +73,6 @@ class MyStackTest {
 		int expected = stack.peek();
 		int actual = one;
 		assertEquals("List was not create", expected, actual);
-
 	}
 
 	/**
