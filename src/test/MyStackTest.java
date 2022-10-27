@@ -1,12 +1,15 @@
 package test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import exceptions.EmptyStackException;
 import utilities.MyStack;
 import utilities.StackADT;
 
@@ -58,10 +61,8 @@ class MyStackTest {
 	 */
 	@Test
 	void testConstructor() {
-		boolean expected = true;
-		boolean actual = stack != null;
-		assertEquals("Stack was not created", expected, actual);
-
+		boolean actual = true;
+		assertNotNull("Stack was not created", actual);
 	}
 
 	/**
@@ -70,9 +71,10 @@ class MyStackTest {
 	@Test
 	void testPush() {
 		stack.push(one);
-		int expected = stack.peek();
-		int actual = one;
-		assertEquals("List was not create", expected, actual);
+		int expected = one;
+		int actual = stack.peek();
+		assertTrue("Stack was not pushed", expected == actual);
+
 	}
 
 	/**
@@ -80,7 +82,11 @@ class MyStackTest {
 	 */
 	@Test
 	void testPop() {
-		fail("Not yet implemented");
+		stack.push(one);
+		stack.push(two);
+		int actual = stack.pop();
+		int expected = two;
+		assertTrue("Stack was not poped", expected == actual);
 	}
 
 	/**
@@ -88,7 +94,11 @@ class MyStackTest {
 	 */
 	@Test
 	void testPeek() {
-		fail("Not yet implemented");
+		stack.push(one);
+		stack.push(two);
+		int actual = stack.peek();
+		int expected = two;
+		assertTrue("Stack was not poped", expected == actual);
 	}
 
 	/**
@@ -96,7 +106,28 @@ class MyStackTest {
 	 */
 	@Test
 	void testClear() {
-		fail("Not yet implemented");
+		stack.push(one);
+		stack.push(two);
+		stack.push(three);
+		stack.clear();
+		int expected = 0;
+		int actual = stack.size();
+		assertTrue("Stack was not cleared", expected == actual);
+	}
+
+	/**
+	 * Test method for {@link utilities.MyStack#clear()}.
+	 */
+	@Test
+	void testClearThenAdd() {
+		stack.push(one);
+		stack.push(two);
+		stack.push(three);
+		stack.clear();
+		stack.push(four);
+		int expected = four;
+		int actual = stack.peek();
+		assertTrue("Stack was not cleared or pushed successfully", expected == actual);
 	}
 
 	/**
@@ -104,7 +135,11 @@ class MyStackTest {
 	 */
 	@Test
 	void testIsEmpty() {
-		fail("Not yet implemented");
+		stack.push(one);
+		stack.push(two);
+		stack.push(three);
+		stack.clear();
+		assertTrue(stack.isEmpty());
 	}
 
 	/**
@@ -136,7 +171,13 @@ class MyStackTest {
 	 */
 	@Test
 	void testSearch() {
-		fail("Not yet implemented");
+		stack.push(one);
+		stack.push(two);
+		stack.push(three);
+		int actual = stack.search(three);
+		int expected = 1;
+		assertEquals(actual, expected);
+
 	}
 
 	/**
@@ -160,7 +201,39 @@ class MyStackTest {
 	 */
 	@Test
 	void testSize() {
-		fail("Not yet implemented");
+		stack.push(one);
+		stack.push(two);
+		stack.push(three);
+		int actual = stack.size();
+		int expected = 3;
+		assertEquals(actual, expected);
 	}
 
+	/**
+	 * Test method for {@link utilities.}.
+	 */
+	@Test
+	void testPeek_EmptyStackException() {
+
+		try {
+			stack.peek();
+		} catch (EmptyStackException ex) {
+			assertTrue(true);
+		}
+	}
+
+	/**
+	 * Test method for {@link utilities.}.
+	 */
+	@Test
+	void testPop_EmptyStackException() {
+
+		try {
+			stack.pop();
+
+		} catch (EmptyStackException ex) {
+			assertTrue(true);
+		}
+
+	}
 }

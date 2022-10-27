@@ -22,17 +22,16 @@ public class MyStack<E> implements StackADT<E> {
 	 * Initializes the newly created MyStack
 	 */
 	public MyStack() {
-
 		myStack = new MyArrayList<E>();
 		size = 0;
-
 	}
 
 	@Override
 	public void push(E toAdd) throws NullPointerException {
 		try {
-			if (myStack.add(toAdd) == true) {
+			if (myStack.add(toAdd)) {
 				size++;
+				myStack.set(size - 1, toAdd);
 			}
 
 		} catch (NullPointerException ex) {
@@ -44,13 +43,14 @@ public class MyStack<E> implements StackADT<E> {
 	@Override
 	public E pop() throws EmptyStackException {
 		E element = null;
-		try {
-			element = myStack.get(size);
-			myStack.remove(size);
+		if (size == 0) {
+			throw new EmptyStackException();
+		} else if (size > 0) {
+			element = myStack.get(size - 1);
+			myStack.remove(size - 1);
 			size--;
-		} catch (EmptyStackException ex) {
-			System.out.println("This stack is empty");
 		}
+
 		return element;
 
 	}
@@ -58,10 +58,10 @@ public class MyStack<E> implements StackADT<E> {
 	@Override
 	public E peek() throws EmptyStackException {
 		E element = null;
-		try {
-			element = myStack.get(size);
-		} catch (EmptyStackException ex) {
-			System.out.println("This stack is empty");
+		if (size == 0) {
+			throw new EmptyStackException();
+		} else if (size > 0) {
+			element = myStack.get(size - 1);
 		}
 		return element;
 	}
@@ -88,7 +88,7 @@ public class MyStack<E> implements StackADT<E> {
 	public Object[] toArray() {
 		Object[] temp = new Object[size];
 		int i = 0;
-		int j = size;
+		int j = size - 1;
 		while (i < size) {
 			temp[i] = myStack.get(j);
 			i++;
@@ -102,7 +102,7 @@ public class MyStack<E> implements StackADT<E> {
 	public E[] toArray(E[] holder) throws NullPointerException {
 
 		int i = 0;
-		int j = size;
+		int j = size - 1;
 		try {
 
 			while (i < size) {
@@ -132,7 +132,7 @@ public class MyStack<E> implements StackADT<E> {
 		if (toFind == null) {
 			throw new NullPointerException("The parameter being passed is of null value");
 		} else {
-			for (int i = size; i >= 1; i--) {
+			for (int i = size - 1; i >= 1; i--) {
 				if (myStack.get(i).equals(toFind)) {
 					containsElement = true;
 				}
