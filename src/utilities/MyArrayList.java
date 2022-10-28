@@ -10,13 +10,12 @@ import java.util.NoSuchElementException;
  * @param <E>
  * @author Hoa Le, Weilong Mao, Hu Peng, Chris Wang
  */
-public class MyArrayList<E> implements ListADT<E>,Iterator<E> {
+public class MyArrayList<E> implements ListADT<E>, Iterator<E> {
     private int size;
     private int index;
     private E[] myArrayList;
     private final int DEFAULT_CAPACITY = 10;
     private int arraySize = DEFAULT_CAPACITY;
-
 
 
     //Constructor
@@ -123,13 +122,19 @@ public class MyArrayList<E> implements ListADT<E>,Iterator<E> {
         }
     }
 
-    private int indexOf(E toRemove) {
-        for (int i = 0; i < size; i++) {
-            if (myArrayList[i].equals(toRemove)) {
-                return i;
+    private int indexOf(E toFind) throws NullPointerException {
+        if (toFind == null) {
+            throw new NullPointerException("The element is null");
+        } else if(size == 0){
+            return -1;
+        } else {
+            for (int i = 0; i < size; i++) {
+                if (myArrayList[i].equals(toFind)) {
+                    return i;
+                }
             }
+            return -1;
         }
-        return -1;
     }
 
     @Override
@@ -155,14 +160,13 @@ public class MyArrayList<E> implements ListADT<E>,Iterator<E> {
         if (toFind == null) {
             throw new NullPointerException("The element is null");
         } else if (size == 0) {
-            throw new NoSuchElementException("The element is not in the list");
-        } else {
-            for (int i = 0; i < size; i++) {
-                if (myArrayList[i].equals(toFind)) {
-                    return true;
-                }
-            }
             return false;
+        } else {
+            if(indexOf(toFind) == -1){
+                return false;
+            } else {
+                return true;
+            }
         }
     }
 
@@ -209,7 +213,7 @@ public class MyArrayList<E> implements ListADT<E>,Iterator<E> {
 
     @Override
     public boolean hasNext() {
-        return (index< size&& myArrayList[index] != null);
+        return (index < size && myArrayList[index] != null);
     }
 
     @Override

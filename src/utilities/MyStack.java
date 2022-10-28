@@ -16,7 +16,6 @@ public class MyStack<E> implements StackADT<E> {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private int size;
 	private MyArrayList<E> myStack;
 
 	/**
@@ -24,58 +23,41 @@ public class MyStack<E> implements StackADT<E> {
 	 */
 	public MyStack() {
 		myStack = new MyArrayList<E>();
-		size = 0;
 	}
 
 	@Override
 	public void push(E toAdd) throws NullPointerException {
 		try {
-			if (myStack.add(toAdd)) {
-				size++;
-				myStack.set(size - 1, toAdd);
-			}
-
+			myStack.add(toAdd);
 		} catch (NullPointerException ex) {
 			System.out.println("The parameter being passed is of null value");
 		}
-
 	}
 
 	@Override
 	public E pop() throws EmptyStackException {
-		E element = null;
-		if (size == 0) {
+		if (myStack.size() <= 0) {
 			throw new EmptyStackException("Stack is empty");
-		} else if (size > 0) {
-			element = myStack.get(size - 1);
-			myStack.remove(size - 1);
-			size--;
 		}
-
-		return element;
-
+		return myStack.remove(myStack.size() - 1);
 	}
 
 	@Override
 	public E peek() throws EmptyStackException {
-		E element = null;
-		if (size == 0) {
+		if (myStack.size() <= 0) {
 			throw new EmptyStackException("Stack is empty");
-		} else if (size > 0) {
-			element = myStack.get(size - 1);
 		}
-		return element;
+		return myStack.get(myStack.size() - 1);
 	}
 
 	@Override
 	public void clear() {
 		myStack.clear();
-		size = 0;
 	}
 
 	@Override
 	public boolean isEmpty() {
-		return size == 0;
+		return myStack.isEmpty();
 	}
 
 	/**
@@ -86,35 +68,13 @@ public class MyStack<E> implements StackADT<E> {
 	 *         sequence.
 	 */
 	@Override
-	public Object[] toArray() {
-		Object[] temp = new Object[size];
-		int i = size - 1;
-		int j = size - 1;
-		while (i >= 0) {
-			temp[i] = myStack.get(j);
-			i--;
-			j--;
-		}
-
-		return temp;
+	public E[] toArray() {
+		return myStack.toArray();
 	}
 
 	@Override
 	public E[] toArray(E[] holder) throws NullPointerException {
-
-		int i = size - 1;
-		int j = size - 1;
-		try {
-
-			while (i >= 0) {
-				holder[i] = myStack.get(j);
-				i--;
-				j--;
-			}
-		} catch (NullPointerException ex) {
-			System.out.println("This holder is null");
-		}
-		return holder;
+		return myStack.toArray(holder);
 	}
 
 	/**
@@ -129,17 +89,7 @@ public class MyStack<E> implements StackADT<E> {
 	 */
 	@Override
 	public boolean contains(E toFind) throws NullPointerException {
-		boolean containsElement = false;
-		if (toFind == null) {
-			throw new NullPointerException("The parameter being passed is of null value");
-		} else if (size > 0) {
-			for (int i = size - 1; i >= 0; i--) {
-				if (myStack.get(i).equals(toFind)) {
-					containsElement = true;
-				}
-			}
-		}
-		return containsElement;
+		return myStack.contains(toFind);
 	}
 
 	/**
@@ -159,12 +109,11 @@ public class MyStack<E> implements StackADT<E> {
 	public int search(E toFind) {
 		int distance = 0;
 		int position = -1;
-		for (int i = size - 1; i >= 0; i--) {
+		for (int i = myStack.size() - 1; i >= 0; i--) {
 			distance++;
 			if (myStack.get(i).equals(toFind)) {
 				position = distance;
 			}
-
 		}
 		return position;
 	}
@@ -176,13 +125,13 @@ public class MyStack<E> implements StackADT<E> {
 
 			@Override
 			public boolean hasNext() {
-				return index < size;
+				return index < myStack.size();
 			}
 
 			@Override
 			public E next() {
 				if (!hasNext()) {
-					throw new NoSuchElementException("The element is not in the list");
+					throw new NoSuchElementException("No more elements");
 				} else {
 					return myStack.get(index++);
 				}
@@ -192,19 +141,22 @@ public class MyStack<E> implements StackADT<E> {
 
 	@Override
 	public boolean equals(StackADT<E> that) {
-		boolean isEqual = true;
-		if (that.size() == this.size) {
-			for (int i = size - 1; i >= 0; i--) {
-				if (!that.pop().equals(myStack.get(i)))
-					isEqual = false;
+		if (this.size() != that.size()) {
+			return false;
+		}
+		Iterator<E> thisIterator = this.iterator();
+		Iterator<E> thatIterator = that.iterator();
+		while (thisIterator.hasNext() && thatIterator.hasNext()) {
+			if (!thisIterator.next().equals(thatIterator.next())) {
+				return false;
 			}
 		}
-		return isEqual;
+		return true;
 	}
 
 	@Override
 	public int size() {
-		return this.size;
+		return myStack.size();
 	}
 
 }
