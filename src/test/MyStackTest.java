@@ -1,15 +1,18 @@
 package test;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
+import org.junit.Assert;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import exceptions.EmptyStackException;
+import utilities.Iterator;
 import utilities.MyStack;
 import utilities.StackADT;
 
@@ -147,7 +150,15 @@ class MyStackTest {
 	 */
 	@Test
 	void testToArray() {
-		fail("Not yet implemented");
+		stack.push(one);
+		stack.push(two);
+		stack.push(three);
+		stack.push(four);
+		stack.push(five);
+		Object array[] = stack.toArray();
+		Object[] expected = { one, two, three, four, five };
+		assertArrayEquals(array, expected);
+
 	}
 
 	/**
@@ -155,7 +166,14 @@ class MyStackTest {
 	 */
 	@Test
 	void testToArrayEArray() {
-		fail("Not yet implemented");
+		stack.push(one);
+		stack.push(two);
+		stack.push(three);
+		stack.push(four);
+		stack.push(five);
+		Integer[] holder = new Integer[5];
+		Object[] expected = { one, two, three, four, five };
+		assertArrayEquals(stack.toArray(holder), expected);
 	}
 
 	/**
@@ -163,7 +181,10 @@ class MyStackTest {
 	 */
 	@Test
 	void testContains() {
-		fail("Not yet implemented");
+		stack.push(one);
+		stack.push(two);
+		stack.push(three);
+		assertTrue(stack.contains(one));
 	}
 
 	/**
@@ -174,8 +195,8 @@ class MyStackTest {
 		stack.push(one);
 		stack.push(two);
 		stack.push(three);
-		int actual = stack.search(three);
-		int expected = 1;
+		int actual = stack.search(one);
+		int expected = 3;
 		assertEquals(actual, expected);
 
 	}
@@ -185,15 +206,44 @@ class MyStackTest {
 	 */
 	@Test
 	void testIterator() {
-		fail("Not yet implemented");
+		stack.push(one);
+		stack.push(two);
+		stack.push(three);
+		Iterator<Integer> it = stack.iterator();
+		int expected = 1;
+		int actual = it.next();
+		assertEquals("Iterator is not correct", expected, actual);
+
 	}
 
 	/**
 	 * Test method for {@link utilities.MyStack#equals(StackADT)}.
 	 */
 	@Test
-	void testEqualsStackADTOfE() {
-		fail("Not yet implemented");
+	void testEqualsStackADT() {
+		stack.push(one);
+		stack.push(two);
+		stack.push(three);
+		MyStack<Integer> newStack = new MyStack<>();
+		newStack.push(one);
+		newStack.push(two);
+		newStack.push(three);
+		assertTrue(stack.equals(newStack));
+	}
+
+	/**
+	 * Test method for {@link utilities.MyStack#equals(StackADT)}.
+	 */
+	@Test
+	void testEqualsStackADTFail() {
+		stack.push(one);
+		stack.push(two);
+		stack.push(three);
+		MyStack<Integer> newStack = new MyStack<>();
+		newStack.push(one);
+		newStack.push(two);
+		newStack.push(four);
+		assertFalse(stack.equals(newStack));
 	}
 
 	/**
@@ -210,30 +260,33 @@ class MyStackTest {
 	}
 
 	/**
-	 * Test method for {@link utilities.}.
+	 * Test method for {@link exception.EmptyStackException}.
 	 */
 	@Test
 	void testPeek_EmptyStackException() {
 
 		try {
+			stack.clear();
 			stack.peek();
+			Assert.fail();
 		} catch (EmptyStackException ex) {
 			assertTrue(true);
 		}
 	}
 
 	/**
-	 * Test method for {@link utilities.}.
+	 * Test method for {@link exception.EmptyStackException}.
 	 */
 	@Test
 	void testPop_EmptyStackException() {
 
 		try {
+			stack.clear();
 			stack.pop();
-
+			Assert.fail();
 		} catch (EmptyStackException ex) {
 			assertTrue(true);
 		}
-
 	}
+
 }

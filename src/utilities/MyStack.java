@@ -1,7 +1,8 @@
 package utilities;
 
-import java.util.EmptyStackException;
 import java.util.NoSuchElementException;
+
+import exceptions.EmptyStackException;
 
 /**
  * Class description:
@@ -44,7 +45,7 @@ public class MyStack<E> implements StackADT<E> {
 	public E pop() throws EmptyStackException {
 		E element = null;
 		if (size == 0) {
-			throw new EmptyStackException();
+			throw new EmptyStackException("Stack is empty");
 		} else if (size > 0) {
 			element = myStack.get(size - 1);
 			myStack.remove(size - 1);
@@ -59,7 +60,7 @@ public class MyStack<E> implements StackADT<E> {
 	public E peek() throws EmptyStackException {
 		E element = null;
 		if (size == 0) {
-			throw new EmptyStackException();
+			throw new EmptyStackException("Stack is empty");
 		} else if (size > 0) {
 			element = myStack.get(size - 1);
 		}
@@ -87,11 +88,11 @@ public class MyStack<E> implements StackADT<E> {
 	@Override
 	public Object[] toArray() {
 		Object[] temp = new Object[size];
-		int i = 0;
+		int i = size - 1;
 		int j = size - 1;
-		while (i < size) {
+		while (i >= 0) {
 			temp[i] = myStack.get(j);
-			i++;
+			i--;
 			j--;
 		}
 
@@ -101,13 +102,13 @@ public class MyStack<E> implements StackADT<E> {
 	@Override
 	public E[] toArray(E[] holder) throws NullPointerException {
 
-		int i = 0;
+		int i = size - 1;
 		int j = size - 1;
 		try {
 
-			while (i < size) {
+			while (i >= 0) {
 				holder[i] = myStack.get(j);
-				i++;
+				i--;
 				j--;
 			}
 		} catch (NullPointerException ex) {
@@ -131,16 +132,14 @@ public class MyStack<E> implements StackADT<E> {
 		boolean containsElement = false;
 		if (toFind == null) {
 			throw new NullPointerException("The parameter being passed is of null value");
-		} else {
-			for (int i = size - 1; i >= 1; i--) {
+		} else if (size > 0) {
+			for (int i = size - 1; i >= 0; i--) {
 				if (myStack.get(i).equals(toFind)) {
 					containsElement = true;
 				}
 			}
-
-			return containsElement;
 		}
-
+		return containsElement;
 	}
 
 	/**
@@ -160,7 +159,7 @@ public class MyStack<E> implements StackADT<E> {
 	public int search(E toFind) {
 		int distance = 0;
 		int position = -1;
-		for (int i = size; i >= 1; i--) {
+		for (int i = size - 1; i >= 0; i--) {
 			distance++;
 			if (myStack.get(i).equals(toFind)) {
 				position = distance;
@@ -173,11 +172,11 @@ public class MyStack<E> implements StackADT<E> {
 	@Override
 	public Iterator<E> iterator() {
 		return new Iterator<E>() {
-			private int index = 1;
+			private int index = 0;
 
 			@Override
 			public boolean hasNext() {
-				return index <= size;
+				return index < size;
 			}
 
 			@Override
@@ -195,7 +194,7 @@ public class MyStack<E> implements StackADT<E> {
 	public boolean equals(StackADT<E> that) {
 		boolean isEqual = true;
 		if (that.size() == this.size) {
-			for (int i = size; i >= 1; i--) {
+			for (int i = size - 1; i >= 0; i--) {
 				if (!that.pop().equals(myStack.get(i)))
 					isEqual = false;
 			}
