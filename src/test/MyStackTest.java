@@ -6,10 +6,10 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import org.junit.After;
 import org.junit.Assert;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
 import exceptions.EmptyStackException;
 import utilities.Iterator;
@@ -23,7 +23,7 @@ import utilities.StackADT;
  *
  * 
  */
-class MyStackTest {
+public class MyStackTest {
 
 	private MyStack<Integer> stack;
 	private Integer one;
@@ -35,8 +35,8 @@ class MyStackTest {
 	/**
 	 * @throws java.lang.Exception
 	 */
-	@BeforeEach
-	void setUp() throws Exception {
+	@Before
+	public void setUp() throws Exception {
 		stack = new MyStack<Integer>();
 		one = Integer.valueOf(1);
 		two = Integer.valueOf(2);
@@ -49,8 +49,8 @@ class MyStackTest {
 	/**
 	 * @throws java.lang.Exception
 	 */
-	@AfterEach
-	void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 		stack = null;
 		one = null;
 		two = null;
@@ -63,7 +63,7 @@ class MyStackTest {
 	 * Test method for {@link utilities.MyStack#MyStack()}.
 	 */
 	@Test
-	void testConstructor() {
+	public void testConstructor() {
 		boolean actual = true;
 		assertNotNull("Stack was not created", actual);
 	}
@@ -72,7 +72,7 @@ class MyStackTest {
 	 * Test method for {@link utilities.MyStack#push(E)}.
 	 */
 	@Test
-	void testPush() {
+	public void testPush() {
 		stack.push(one);
 		int expected = one;
 		int actual = stack.peek();
@@ -84,7 +84,7 @@ class MyStackTest {
 	 * Test method for {@link utilities.MyStack#pop()}.
 	 */
 	@Test
-	void testPop() {
+	public void testPop() {
 		stack.push(one);
 		stack.push(two);
 		int actual = stack.pop();
@@ -96,7 +96,7 @@ class MyStackTest {
 	 * Test method for {@link utilities.MyStack#peek()}.
 	 */
 	@Test
-	void testPeek() {
+	public void testPeek() {
 		stack.push(one);
 		stack.push(two);
 		int actual = stack.peek();
@@ -108,7 +108,7 @@ class MyStackTest {
 	 * Test method for {@link utilities.MyStack#clear()}.
 	 */
 	@Test
-	void testClear() {
+	public void testClear() {
 		stack.push(one);
 		stack.push(two);
 		stack.push(three);
@@ -122,7 +122,7 @@ class MyStackTest {
 	 * Test method for {@link utilities.MyStack#clear()}.
 	 */
 	@Test
-	void testClearThenAdd() {
+	public void testClearThenAdd() {
 		stack.push(one);
 		stack.push(two);
 		stack.push(three);
@@ -137,7 +137,7 @@ class MyStackTest {
 	 * Test method for {@link utilities.MyStack#isEmpty()}.
 	 */
 	@Test
-	void testIsEmpty() {
+	public void testIsEmpty() {
 		stack.push(one);
 		stack.push(two);
 		stack.push(three);
@@ -149,7 +149,7 @@ class MyStackTest {
 	 * Test method for {@link utilities.MyStack#toArray()}.
 	 */
 	@Test
-	void testToArray() {
+	public void testToArray() {
 		stack.push(one);
 		stack.push(two);
 		stack.push(three);
@@ -165,7 +165,7 @@ class MyStackTest {
 	 * Test method for {@link utilities.MyStack#toArray(E[])}.
 	 */
 	@Test
-	void testToArrayEArray() {
+	public void testToArrayEArray() {
 		stack.push(one);
 		stack.push(two);
 		stack.push(three);
@@ -180,7 +180,7 @@ class MyStackTest {
 	 * Test method for {@link utilities.MyStack#contains(E)}.
 	 */
 	@Test
-	void testContains() {
+	public void testContains() {
 		stack.push(one);
 		stack.push(two);
 		stack.push(three);
@@ -191,7 +191,7 @@ class MyStackTest {
 	 * Test method for {@link utilities.MyStack#search(E)}.
 	 */
 	@Test
-	void testSearch() {
+	public void testSearch() {
 		stack.push(one);
 		stack.push(two);
 		stack.push(three);
@@ -205,7 +205,7 @@ class MyStackTest {
 	 * Test method for {@link utilities.MyStack#iterator()}.
 	 */
 	@Test
-	void testIterator() {
+	public void testIterator() {
 		stack.push(one);
 		stack.push(two);
 		stack.push(three);
@@ -220,7 +220,7 @@ class MyStackTest {
 	 * Test method for {@link utilities.MyStack#equals(StackADT)}.
 	 */
 	@Test
-	void testEqualsStackADT() {
+	public void testEqualsStackADT() {
 		stack.push(one);
 		stack.push(two);
 		stack.push(three);
@@ -235,7 +235,7 @@ class MyStackTest {
 	 * Test method for {@link utilities.MyStack#equals(StackADT)}.
 	 */
 	@Test
-	void testEqualsStackADTFail() {
+	public void testEqualsStackADTFail() {
 		stack.push(one);
 		stack.push(two);
 		stack.push(three);
@@ -250,7 +250,7 @@ class MyStackTest {
 	 * Test method for {@link utilities.MyStack#size()}.
 	 */
 	@Test
-	void testSize() {
+	public void testSize() {
 		stack.push(one);
 		stack.push(two);
 		stack.push(three);
@@ -263,7 +263,7 @@ class MyStackTest {
 	 * Test method for {@link exception.EmptyStackException}.
 	 */
 	@Test
-	void testPeek_EmptyStackException() {
+	public void testPeek_EmptyStackException() {
 
 		try {
 			stack.clear();
@@ -278,7 +278,7 @@ class MyStackTest {
 	 * Test method for {@link exception.EmptyStackException}.
 	 */
 	@Test
-	void testPop_EmptyStackException() {
+	public void testPop_EmptyStackException() {
 
 		try {
 			stack.clear();
