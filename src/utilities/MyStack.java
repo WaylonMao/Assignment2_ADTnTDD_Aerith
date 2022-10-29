@@ -27,11 +27,10 @@ public class MyStack<E> implements StackADT<E> {
 
 	@Override
 	public void push(E toAdd) throws NullPointerException {
-		try {
+		if (toAdd != null)
 			myStack.add(toAdd);
-		} catch (NullPointerException ex) {
-			System.out.println("The parameter being passed is of null value");
-		}
+		else
+			throw new NullPointerException("The argument being passed is of null value");
 	}
 
 	@Override

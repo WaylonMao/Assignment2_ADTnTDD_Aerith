@@ -6,6 +6,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.util.NoSuchElementException;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -247,6 +249,20 @@ public class MyStackTest {
 	}
 
 	/**
+	 * Test method for {@link utilities.MyStack#equals(StackADT)}.
+	 */
+	@Test
+	public void testEqualsStackADTSize() {
+		stack.push(one);
+		stack.push(two);
+		stack.push(three);
+		MyStack<Integer> newStack = new MyStack<>();
+		newStack.push(one);
+		newStack.push(two);
+		assertFalse(stack.equals(newStack));
+	}
+
+	/**
 	 * Test method for {@link utilities.MyStack#size()}.
 	 */
 	@Test
@@ -289,4 +305,36 @@ public class MyStackTest {
 		}
 	}
 
+	/**
+	 * Test method for {@link utilities.MyStack#iterator()}.
+	 */
+	@Test
+	public void testNoSuchElementException() {
+		try {
+			stack.push(one);
+			stack.push(two);
+			stack.push(three);
+			Iterator<Integer> it = stack.iterator();
+			it.next();
+		} catch (NoSuchElementException ex) {
+			assertTrue(true);
+		}
+
+	}
+
+	/**
+	 * Test method for {@link utilities.MyStack#equals(StackADT)}.
+	 */
+	@Test
+	public void testNullPointerException() {
+
+		try {
+
+			stack.push(null);
+
+			Assert.fail();
+		} catch (NullPointerException ex) {
+			assertTrue(true);
+		}
+	}
 }
