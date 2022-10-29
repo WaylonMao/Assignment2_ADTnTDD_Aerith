@@ -115,10 +115,7 @@ public class MyDLL<E> implements ListADT<E> {
                 throw new NullPointerException("The element is null");
             } else {
                 MyDLLNode<E> newNode = new MyDLLNode<>(toAdd);
-                MyDLLNode<E> current = head;
-                for (int i = 0; i < index; i++) {
-                    current = current.getNext();
-                }
+                MyDLLNode<E> current = getNode(index);
                 newNode.setNext(current);
                 newNode.setPrevious(current.getPrevious());
                 current.getPrevious().setNext(newNode);
@@ -174,11 +171,8 @@ public class MyDLL<E> implements ListADT<E> {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("The index is out of range");
         } else {
-            MyDLLNode<E> current = head;
-            for (int i = 0; i < index; i++) {
-                current = current.getNext();
-            }
-            return current.getData();
+              MyDLLNode<E> current = getNode(index);
+                return current.getData();
         }
     }
 
@@ -282,11 +276,7 @@ public class MyDLL<E> implements ListADT<E> {
         } else if (toChange == null) {
             throw new NullPointerException("The element is null, can not set it");
         } else {
-            MyDLLNode<E> current = head;
-            for (int i = 0; i < index; i++) {
-                current = current.getNext();
-
-            }
+            MyDLLNode <E> current = getNode(index);
             E data = current.getData();
             current.setData(toChange);
             return data;
