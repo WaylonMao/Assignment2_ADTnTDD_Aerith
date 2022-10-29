@@ -295,9 +295,10 @@ public class MyDLL<E> implements ListADT<E> {
 
 
     /**
+     * This method is used to find the element in the DLL
      * @param toFind The element whose presence in this list is to be tested.
-     * @return
-     * @throws NullPointerException
+     * @return true if this list contains the specified element.
+     * @throws NullPointerException if the element is null
      */
     @Override
     public boolean contains(E toFind) throws NullPointerException {
@@ -319,11 +320,12 @@ public class MyDLL<E> implements ListADT<E> {
     }
 
     /**
+     * This method is sued to transfer the elements of the DLL to an array
      * @param toHold The array into which the elements of this list are to be
      *               stored, if it is big enough; otherwise, a new array of the
      *               same runtime type is allocated for this purpose.
-     * @return
-     * @throws NullPointerException
+     * @return the array containing the elements of the DLL.
+     * @throws NullPointerException if the array is null
      */
     @Override
     public E[] toArray(E[] toHold) throws NullPointerException {
@@ -343,7 +345,8 @@ public class MyDLL<E> implements ListADT<E> {
     }
 
     /**
-     * @return
+     * This method is used to transfer the elements of the DLL to an array in proper sequence
+     * @return the array containing the elements of the DLL in proper sequence.
      */
     @Override
     public E[] toArray() {
@@ -355,7 +358,12 @@ public class MyDLL<E> implements ListADT<E> {
         }
         return toHold;
     }
-
+    /**
+     * This method is used to get the element at the specified position in the DLL
+     * @param index The index of the element to return.
+     * @return the element at the specified position in the DLL.
+     * @throws IndexOutOfBoundsException if the index is out of range
+     */
     public MyDLLNode<E> getNode(int index) throws IndexOutOfBoundsException {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("The index is out of range");
@@ -381,7 +389,14 @@ public class MyDLL<E> implements ListADT<E> {
     }
 
     /**
-     * @return
+     * This method will provide an mono-directional iterator for any of the
+     * data structures that are specified in this package.
+     *
+     * This iterator makes a copy of the collection of elements and performs a
+     * complete walk through the data structure. Note that the copy must be a
+     * deep copy, so methods such as clone() should not be used.
+     *
+     *
      */
     @Override
     public Iterator iterator() {
