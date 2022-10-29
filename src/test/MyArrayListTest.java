@@ -13,25 +13,23 @@ import utilities.MyArrayList;
 
 /**
  * @author Hoa Le
- *
  */
 public class MyArrayListTest {
 
     // attributes
     private MyArrayList<Integer> list;
-    private  Integer one;
-    private  Integer two;
-    private  Integer three;
+    private Integer one;
+    private Integer two;
+    private Integer three;
     private Integer four;
-    private  Integer five;
-
+    private Integer five;
 
 
     /**
      * @throws java.lang.Exception
      */
     @Before
-    public  void setUpBeforeClass() throws Exception {
+    public void setUpBeforeClass() throws Exception {
         list = new MyArrayList<Integer>();
         one = Integer.valueOf(1);
         two = Integer.valueOf(2);
@@ -44,7 +42,7 @@ public class MyArrayListTest {
      * @throws java.lang.Exception
      */
     @After
-    public  void tearDownAfterClass() throws Exception {
+    public void tearDownAfterClass() throws Exception {
         list = null;
         one = null;
         two = null;
@@ -56,6 +54,7 @@ public class MyArrayListTest {
     @Test
     public void testConstructor() {
         boolean expected = true;
+        list = new MyArrayList<Integer>();
         boolean actual = list != null;
         assertEquals("List was not create", expected, actual);
     }
@@ -70,18 +69,22 @@ public class MyArrayListTest {
 
         int expected = 2;
         int actual = list.size();
-        assertEquals("Size was not 0", expected, actual);
+        assertEquals("Size was not create", expected, actual);
     }
 
-    /**S
+    /**
+     * S
      * Test method for {@link utilities.MyArrayList#clear()}.
      */
     @Test
     public void testClear() {
         int expected = 0;
+        list.add(one);
+        list.add(two);
+        list.add(three);
         list.clear();
         int actual = list.size();
-        assertEquals("The list was not clear after using Clear method",expected, actual);
+        assertEquals("The list was not clear after using Clear method", expected, actual);
     }
 
     /**
@@ -90,25 +93,27 @@ public class MyArrayListTest {
     @Test
     public void testAddIntE_returnTrue() {
         int expected = 3;
-        list.add(0, one);
+        list.add(one);
+        list.add(three);
         list.add(1, two);
-        list.add(2, three);
-        int actual = list.get(2).intValue();
-        assertEquals("Element not added to the correct position in the list",expected, actual);
+        int actual = list.get(2);
+        assertEquals("Element not added to the correct position in the list", expected, actual);
     }
+
     /**
      * Test method for {@link utilities.MyArrayList#add(int, java.lang.Object)}.
      */
     @Test
     public void testAddIntE_NullPointerException() {
+        list.add(two);
+        list.add(three);
         one = null;
         try {
             list.add(0, one);
             fail("NullPointerException was not thrown");
-        }catch(NullPointerException e) {
+        } catch (NullPointerException e) {
             assertTrue(true);
         }
-
     }
 
     @Test
@@ -116,21 +121,20 @@ public class MyArrayListTest {
         list.add(0, one);
         list.add(1, two);
         list.add(2, three);
-        try{
+        try {
             list.add(4, four);
             fail("IndexOutOfBoundsException was not thrown");
-        }catch(IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             assertTrue(true);
         }
-
-
     }
+
     @Test
     public void testAddIntE_ItemAddedCorrectly_Empty() {
         int expected = 1;
         list.add(0, one);
-        int actual = (list.get(0)).intValue();
-        assertEquals("Element added was not correct position",expected, actual);
+        int actual = list.get(0);
+        assertEquals("Element added was not correct position", expected, actual);
     }
 
     @Test
@@ -139,9 +143,9 @@ public class MyArrayListTest {
         list.add(0, one);
         list.add(1, two);
         list.add(1, three);
-        //Expected: 1 2 3
-        int actual = (list.get(2)).intValue();
-        assertEquals("Element added was not correct position",expected, actual);
+        //Expected: 1 3 2
+        int actual = list.get(2);
+        assertEquals("Element added was not correct position", expected, actual);
     }
 
     @Test
@@ -150,21 +154,21 @@ public class MyArrayListTest {
         list.add(0, one);
         list.add(1, two);
         list.add(0, three);
-        //Expected 1, 2, 3
-        int actual = (list.get(0)).intValue();
-        assertEquals("Element added was not correct position",expected, actual);
+        //Expected 3 1 2
+        int actual = list.get(0);
+        assertEquals("Element added was not correct position", expected, actual);
     }
 
     @Test
     public void testAddIntE_ItemAddedCorrectly_Order() {
-        int expected = 3;
+        Integer[] expected = new Integer[]{1, 2, 3};
         list.add(0, three);
         list.add(0, two);
         list.add(0, one);
         // Expected: 1,2,3
-        int actual = (list.get(2)).intValue();
-        System.out.println(list.get(0).intValue());
-        assertEquals("Element added was not correct position",expected, actual);
+        Integer[] actual = new Integer[list.size()];
+        actual = list.toArray(actual);
+        assertArrayEquals("Element added was not correct position", expected,actual);
     }
 
     @Test
@@ -181,12 +185,12 @@ public class MyArrayListTest {
         list.add(3, four);
         list.add(4, five);
 
-       // default size is 10
+        // default size is 10
         // after adding 10 elements, the size should be 20
-        list.add(0,one);
+        list.add(0, one);
         // Expected: 1,2,4,3,5,1,2,4,3,5,1
         int actual = list.size();
-        assertEquals("ArrayList was not resize properly",expected, actual);
+        assertEquals("ArrayList was not resize properly", expected, actual);
     }
 
     /**
@@ -194,33 +198,28 @@ public class MyArrayListTest {
      */
     @Test
     public void testAddE_ReturnArrayTrue() {
-       list.add(one);
-       list.add(two);
-       list.add(three);
-        MyArrayList<Integer> list2 = new MyArrayList<Integer>();
+        list.add(one);
+        list.add(two);
+        list.add(three);
+        MyArrayList<Integer> list2 = new MyArrayList<>();
         list2.add(four);
         list2.add(five);
         list.addAll(list2);
         int expected = 5;
         int actual = list.size();
-        assertEquals("Array was not added to the list",expected, actual);
-
-
-
+        assertEquals("Array was not added to the list", expected, actual);
     }
 
     @Test
     public void testAddE_NullPointerException() {
-         list.add(one);
-         list.add(two);
-         try {
-                list.addAll(null);
-                fail("NullPointerException was not thrown");
-            }catch(NullPointerException e) {
-                assertTrue(true);
-            }
-
-
+        list.add(one);
+        list.add(two);
+        try {
+            list.addAll(null);
+            fail("NullPointerException was not thrown");
+        } catch (NullPointerException e) {
+            assertTrue(true);
+        }
     }
 
     @Test
@@ -229,13 +228,12 @@ public class MyArrayListTest {
         list.add(one);
         list.add(two);
         list.add(three);
-        MyArrayList<Integer> list2 = new MyArrayList<Integer>();
+        MyArrayList<Integer> list2 = new MyArrayList<>();
         list2.add(four);
         list.addAll(list2);
         // Test element added to the end of the list
-        int actual = (list.get(3)).intValue();
-        assertEquals("Element added was not correct position",expected, actual);
-
+        int actual = list.get(3);
+        assertEquals("Element added was not correct position", expected, actual);
     }
 
     @Test
@@ -252,12 +250,12 @@ public class MyArrayListTest {
         list.add(five);
         //default size is 10
         //after adding 10 elements, the size should be 20
-        MyArrayList<Integer> list2 = new MyArrayList<Integer>();
+        MyArrayList<Integer> list2 = new MyArrayList<>();
         list2.add(four);
         list.addAll(list2);
         int expected = 11;
         int actual = list.size();
-        assertEquals("Element added was not correct position",expected, actual);
+        assertEquals("Element added was not correct position", expected, actual);
     }
 
     /**
@@ -270,11 +268,11 @@ public class MyArrayListTest {
         list.add(three);
         list.add(four);
         list.add(five);
-        MyArrayList<Integer> list2 = new MyArrayList<Integer>();
+        MyArrayList<Integer> list2 = new MyArrayList<>();
         list2.add(one);
         list.addAll(list2);
-        int actual = (list.get(0)).intValue();
-        assertEquals("Element added was not correct position",expected, actual);
+        int actual = list.get(0);
+        assertEquals("Element added was not correct position", expected, actual);
     }
 
     @Test
@@ -284,11 +282,11 @@ public class MyArrayListTest {
         list.add(three);
         list.add(four);
         list.add(five);
-        MyArrayList<Integer> list2 = new MyArrayList<Integer>();
+        MyArrayList<Integer> list2 = new MyArrayList<>();
         list2.add(one);
         list.addAll(list2);
-        int actual = (list.get(4)).intValue();
-        assertEquals("Element added was not correct position",expected, actual);
+        int actual = list.get(4);
+        assertEquals("Element added was not correct position", expected, actual);
     }
 
     /**
@@ -301,8 +299,9 @@ public class MyArrayListTest {
         list.add(three);
         //expected: 1,2,3
         int expected = 3;
-        assertTrue("Element added was not included in the list",list.contains(expected));
+        assertTrue("Element added was not included in the list", list.contains(expected));
     }
+
     /**
      * Test method for {@link utilities.MyArrayList#contains(java.lang.Object)}.
      */
@@ -313,7 +312,7 @@ public class MyArrayListTest {
         list.add(three);
         //expected: 1,2,3
         int expected = 4;
-        assertFalse("Element added was not included in the list",list.contains(expected));
+        assertFalse("Element added was not included in the list", list.contains(expected));
     }
 
 
@@ -327,8 +326,7 @@ public class MyArrayListTest {
         list.add(three);
         int expected = 2;
         int actual = list.get(1);
-        assertEquals("Element added was not correct position",expected, actual);
-
+        assertEquals("Element added was not correct position", expected, actual);
     }
 
     @Test
@@ -339,7 +337,7 @@ public class MyArrayListTest {
         int expected = 1;
         int actual = list.get(0);
         System.out.println(actual);
-        assertEquals("Element added was not correct position",expected, actual);
+        assertEquals("Element added was not correct position", expected, actual);
 
     }
 
@@ -350,21 +348,23 @@ public class MyArrayListTest {
         list.add(three);
         int expected = 3;
         int actual = list.get(2);
-        assertEquals("Element added was not correct position",expected, actual);
+        assertEquals("Element added was not correct position", expected, actual);
 
     }
+
     @Test
     public void testGetInt_IndexOutOfBoundsException_greaterThanSize() {
         list.add(one);
-        list.add( two);
-        list.add( three);
+        list.add(two);
+        list.add(three);
         try {
             list.get(3);
             fail("IndexOutOfBoundsException was not thrown");
-        }catch(IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             assertTrue(true);
         }
     }
+
     @Test
     public void testGetInt_IndexOutOfBoundsException_lessThanZero() {
         list.add(one);
@@ -387,9 +387,9 @@ public class MyArrayListTest {
         //expected: 1,2,3,4,5
         int expected = 3;
         int actual = list.remove(2);
-        assertEquals("Element removed was not correct position",expected, actual);
-
+        assertEquals("Element removed was not correct position", expected, actual);
     }
+
     @Test
     public void testRemoveInt_CorrectHead() {
         list.add(one);
@@ -397,9 +397,9 @@ public class MyArrayListTest {
         //expected: 1,2
         int expected = 1;
         int actual = list.remove(0);
-        assertEquals("Element removed was not correct position",expected, actual);
-
+        assertEquals("Element removed was not correct position", expected, actual);
     }
+
     @Test
     public void testRemoveInt_CorrectTail() {
         list.add(one);
@@ -407,9 +407,10 @@ public class MyArrayListTest {
         //expected: 1,2
         int expected = 2;
         int actual = list.remove(1);
-        assertEquals("Element removed was not correct position",expected, actual);
+        assertEquals("Element removed was not correct position", expected, actual);
 
     }
+
     @Test
     public void testRemoveInt_IndexOutOfBoundsException_greaterThanSize() {
         list.add(one);
@@ -418,10 +419,11 @@ public class MyArrayListTest {
         try {
             list.remove(3);
             fail("IndexOutOfBoundsException was not thrown");
-        }catch(IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             assertTrue(true);
         }
     }
+
     @Test
     public void testRemoveInt_IndexOutOfBoundsException_lessThanZero() {
         list.add(one);
@@ -442,8 +444,9 @@ public class MyArrayListTest {
         //expected: 3,2
         int expected = 3;
         int actual = list.remove(three);
-        assertEquals("Element removed was not correct position",expected, actual);
+        assertEquals("Element removed was not correct position", expected, actual);
     }
+
     @Test
     public void testRemoveE_Head() {
         list.add(one);
@@ -451,9 +454,10 @@ public class MyArrayListTest {
         //expected: 1,2
         int expected = 1;
         int actual = list.remove(one);
-        assertEquals("Element removed was not correct position",expected, actual);
+        assertEquals("Element removed was not correct position", expected, actual);
 
     }
+
     @Test
     public void testRemoveE_Tail() {
         list.add(one);
@@ -461,9 +465,10 @@ public class MyArrayListTest {
         //expected: 1,2
         int expected = 2;
         int actual = list.remove(two);
-        assertEquals("Element removed was not correct position",expected, actual);
+        assertEquals("Element removed was not correct position", expected, actual);
 
     }
+
     @Test
     public void testRemoveE_Null() {
         list.add(one);
@@ -473,7 +478,7 @@ public class MyArrayListTest {
         try {
             list.remove(null);
             fail("NullPointerException was not thrown");
-        }   catch(NullPointerException e) {
+        } catch (NullPointerException e) {
             assertTrue(true);
         }
     }
@@ -488,8 +493,7 @@ public class MyArrayListTest {
         list.add(two);
         list.set(1, 4);
         int actual = list.get(1);
-        assertEquals("Element added was not correct position",expected, actual);
-
+        assertEquals("Element added was not correct position", expected, actual);
     }
 
     /**
@@ -497,13 +501,13 @@ public class MyArrayListTest {
      */
     @Test
     public void testIsEmpty_True() {
-        assertTrue("List is not empty",list.isEmpty());
+        assertTrue("List is not empty", list.isEmpty());
     }
 
     @Test
     public void testIsEmpty_False() {
         list.add(one);
-        assertFalse("List is empty",list.isEmpty());
+        assertFalse("List is empty", list.isEmpty());
     }
 
 
@@ -515,22 +519,20 @@ public class MyArrayListTest {
         list.add(one);
         list.add(two);
         list.add(three);
-        Object[] expected = {1,2,3};
-        Object[] actual = new Integer[list.size()];
-        expected = list.toArray((Integer[]) actual);
-        assertArrayEquals("Array is not correct",expected, actual);
+        Object[] expected = {1, 2, 3};
+        Object[] actual = list.toArray();
+        assertArrayEquals("Array is not correct", expected, actual);
     }
+
     @Test
     public void testToArrayEArray_Null() {
-         try{
-           list.add(null);
-           Object [] expected = {null};
-           Object [] actual = new Integer[list.size()];
-           expected = list.toArray((Integer[]) actual);
-           fail("NullPointerException was not thrown");
-       }    catch(NullPointerException e) {
-           assertTrue(true);
-       }
+        try {
+            Integer[] nullArray = null;
+            list.toArray(nullArray);
+            fail("NullPointerException was not thrown");
+        } catch (NullPointerException e) {
+            assertTrue(true);
+        }
     }
 
     /**
@@ -541,9 +543,9 @@ public class MyArrayListTest {
         list.add(one);
         list.add(two);
         list.add(three);
-        Object[] expected = {1,2,3};
+        Object[] expected = {1, 2, 3};
         Object[] actual = list.toArray();
-        assertArrayEquals("Array is not correct",expected, actual);
+        assertArrayEquals("Array is not correct", expected, actual);
     }
 
     /**
@@ -555,9 +557,14 @@ public class MyArrayListTest {
         list.add(two);
         list.add(three);
         Iterator<Integer> it = list.iterator();
-        int expected = 1;
-        int actual = it.next();
-        assertEquals("Iterator is not correct",expected, actual);
+        Integer[] expected = {1, 2, 3};
+        Integer[] actual = new Integer[list.size()];
+        while (it.hasNext()) {
+            for (int i = 0; i < actual.length; i++) {
+                actual[i] = it.next();
+            }
+        }
+        assertArrayEquals("Iterator is not correct", expected, actual);
     }
 
 
