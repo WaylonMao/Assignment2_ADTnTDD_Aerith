@@ -1,20 +1,21 @@
 package utilities;
 
-
 import java.util.NoSuchElementException;
 
 public class MyDLL<E> implements ListADT<E> {
     private int size;
     private MyDLLNode<E> head;
     private MyDLLNode<E> tail;
-
+    /**
+     * Initializes the newly created MyDLL
+     */
     public MyDLL() {
         size = 0;
         this.head = this.tail = null;
     }
 
     /**
-     * @return
+     * This method is sued to get the size of the DLL
      */
     @Override
     public int size() {
@@ -22,7 +23,7 @@ public class MyDLL<E> implements ListADT<E> {
     }
 
     /**
-     *
+     * This method is used to clear the DLL
      */
     @Override
     public void clear() {
@@ -50,9 +51,8 @@ public class MyDLL<E> implements ListADT<E> {
      * @param toAdd the element to add
      * @return true if the element was added
      * @throws NullPointerException
-     * @throws IndexOutOfBoundsException
      */
-    public boolean append(E toAdd) {
+    public boolean append(E toAdd) throws NullPointerException {
         if (toAdd == null) {
             throw new NullPointerException("The element is null");
         } else {
@@ -68,8 +68,14 @@ public class MyDLL<E> implements ListADT<E> {
             return true;
         }
     }
-
-    public boolean prepend(E toAdd) {
+    /**
+     * Method used to add an element to the beginning of the list
+     *
+     * @param toAdd the element to add
+     * @return true if the element was added successfully
+     * @throws NullPointerException if the element is null
+     */
+    public boolean prepend(E toAdd) throws NullPointerException {
         if (toAdd == null) {
             throw new NullPointerException("The element is null");
         } else {
@@ -131,12 +137,15 @@ public class MyDLL<E> implements ListADT<E> {
      */
     @Override
     public boolean add(E toAdd) throws NullPointerException {
-        if (size == 0) {
-            return prepend(toAdd);
-        } else {
-            return append(toAdd);
+      if(toAdd == null)  throw new NullPointerException("The element is null");
+        else{
+            if(size == 0) prepend(toAdd);
+            else append(toAdd);
+            return true;
         }
     }
+
+
 
     /**
      * @param toAdd The new sub list to be added.
@@ -154,13 +163,6 @@ public class MyDLL<E> implements ListADT<E> {
             return true;
         }
     }
-
-    /**
-     * @param toAdd The new sub list to be added.
-     * @return
-     * @throws NullPointerException
-     */
-
 
     /**
      * @param index Index of element to return.
@@ -181,13 +183,14 @@ public class MyDLL<E> implements ListADT<E> {
     }
 
     /**
+     * This method is used to remove the element at the specified index
      * @param index The index of the element to remove.
-     * @return
+     * @return the element that was removed from the list.
      * @throws IndexOutOfBoundsException
      */
     @Override
     public E remove(int index) throws IndexOutOfBoundsException {
-        if (index < 0 || index >= size || size == 0) {
+        if (index < 0 || index >= size ) {
             throw new IndexOutOfBoundsException("The index is out of range");
         }
         MyDLLNode<E> current = getNode(index);
@@ -209,7 +212,11 @@ public class MyDLL<E> implements ListADT<E> {
         size--;
         return current.getData();
     }
-
+    /**
+     * This method is used to remove the first occurrence of the specified element
+     * @return the element at the head of DLL .
+     * @throws NullPointerException if the element is null
+     */
     public E removeFirst() throws IndexOutOfBoundsException {
         if (isEmpty()) {
             throw new IndexOutOfBoundsException("The list is empty, nothing to remove");
@@ -217,7 +224,11 @@ public class MyDLL<E> implements ListADT<E> {
             return remove(0);
         }
     }
-
+    /**
+     * This method is used to remove the last occurrence of the specified element
+     * @return the element at the tail of DLL .
+     * @throws NullPointerException if the element is null
+     */
     public E removeLast() throws IndexOutOfBoundsException {
         if (isEmpty()) {
             throw new IndexOutOfBoundsException("The list is empty, nothing to remove");
@@ -227,9 +238,10 @@ public class MyDLL<E> implements ListADT<E> {
     }
 
     /**
+     * This method is used to remove the first occurrence of the specified element
      * @param toRemove The element to be removed from this list.
-     * @return
-     * @throws NullPointerException
+     * @return the element that was removed from the list.
+     * @throws NullPointerException if the element is null
      */
     @Override
     public E remove(E toRemove) throws NullPointerException {
@@ -273,6 +285,7 @@ public class MyDLL<E> implements ListADT<E> {
             MyDLLNode<E> current = head;
             for (int i = 0; i < index; i++) {
                 current = current.getNext();
+
             }
             E data = current.getData();
             current.setData(toChange);
