@@ -157,5 +157,4 @@ public class MyStack<E> implements StackADT<E> {
 	public int size() {
 		return myStack.size();
 	}
-
 }

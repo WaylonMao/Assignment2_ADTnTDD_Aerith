@@ -327,11 +327,8 @@ public class MyStackTest {
 	 */
 	@Test
 	public void testNullPointerException() {
-
 		try {
-
 			stack.push(null);
-
 			Assert.fail();
 		} catch (NullPointerException ex) {
 			assertTrue(true);
