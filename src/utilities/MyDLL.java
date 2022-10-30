@@ -6,6 +6,7 @@ public class MyDLL<E> implements ListADT<E> {
     private int size;
     private MyDLLNode<E> head;
     private MyDLLNode<E> tail;
+
     /**
      * Initializes the newly created MyDLL
      */
@@ -68,6 +69,7 @@ public class MyDLL<E> implements ListADT<E> {
             return true;
         }
     }
+
     /**
      * Method used to add an element to the beginning of the list
      *
@@ -134,14 +136,13 @@ public class MyDLL<E> implements ListADT<E> {
      */
     @Override
     public boolean add(E toAdd) throws NullPointerException {
-      if(toAdd == null)  throw new NullPointerException("The element is null");
-        else{
-            if(size == 0) prepend(toAdd);
+        if (toAdd == null) throw new NullPointerException("The element is null");
+        else {
+            if (size == 0) prepend(toAdd);
             else append(toAdd);
             return true;
         }
     }
-
 
 
     /**
@@ -171,20 +172,21 @@ public class MyDLL<E> implements ListADT<E> {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("The index is out of range");
         } else {
-              MyDLLNode<E> current = getNode(index);
-                return current.getData();
+            MyDLLNode<E> current = getNode(index);
+            return current.getData();
         }
     }
 
     /**
      * This method is used to remove the element at the specified index
+     *
      * @param index The index of the element to remove.
      * @return the element that was removed from the list.
      * @throws IndexOutOfBoundsException
      */
     @Override
     public E remove(int index) throws IndexOutOfBoundsException {
-        if (index < 0 || index >= size ) {
+        if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("The index is out of range");
         }
         MyDLLNode<E> current = getNode(index);
@@ -206,8 +208,10 @@ public class MyDLL<E> implements ListADT<E> {
         size--;
         return current.getData();
     }
+
     /**
      * This method is used to remove the first occurrence of the specified element
+     *
      * @return the element at the head of DLL .
      * @throws NullPointerException if the element is null
      */
@@ -218,8 +222,10 @@ public class MyDLL<E> implements ListADT<E> {
             return remove(0);
         }
     }
+
     /**
      * This method is used to remove the last occurrence of the specified element
+     *
      * @return the element at the tail of DLL .
      * @throws NullPointerException if the element is null
      */
@@ -233,6 +239,7 @@ public class MyDLL<E> implements ListADT<E> {
 
     /**
      * This method is used to remove the first occurrence of the specified element
+     *
      * @param toRemove The element to be removed from this list.
      * @return the element that was removed from the list.
      * @throws NullPointerException if the element is null
@@ -276,7 +283,7 @@ public class MyDLL<E> implements ListADT<E> {
         } else if (toChange == null) {
             throw new NullPointerException("The element is null, can not set it");
         } else {
-            MyDLLNode <E> current = getNode(index);
+            MyDLLNode<E> current = getNode(index);
             E data = current.getData();
             current.setData(toChange);
             return data;
@@ -286,6 +293,7 @@ public class MyDLL<E> implements ListADT<E> {
 
     /**
      * This method is used to find the element in the DLL
+     *
      * @param toFind The element whose presence in this list is to be tested.
      * @return true if this list contains the specified element.
      * @throws NullPointerException if the element is null
@@ -296,7 +304,6 @@ public class MyDLL<E> implements ListADT<E> {
             throw new NullPointerException("The element is null");
         } else if (size == 0) {
             return false;
-
         } else {
             MyDLLNode<E> current = head;
             while (current != null) {
@@ -311,6 +318,7 @@ public class MyDLL<E> implements ListADT<E> {
 
     /**
      * This method is sued to transfer the elements of the DLL to an array
+     *
      * @param toHold The array into which the elements of this list are to be
      *               stored, if it is big enough; otherwise, a new array of the
      *               same runtime type is allocated for this purpose.
@@ -336,6 +344,7 @@ public class MyDLL<E> implements ListADT<E> {
 
     /**
      * This method is used to transfer the elements of the DLL to an array in proper sequence
+     *
      * @return the array containing the elements of the DLL in proper sequence.
      */
     @Override
@@ -348,8 +357,10 @@ public class MyDLL<E> implements ListADT<E> {
         }
         return toHold;
     }
+
     /**
      * This method is used to get the element at the specified position in the DLL
+     *
      * @param index The index of the element to return.
      * @return the element at the specified position in the DLL.
      * @throws IndexOutOfBoundsException if the index is out of range
@@ -358,11 +369,11 @@ public class MyDLL<E> implements ListADT<E> {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("The index is out of range");
         } else {
-            if(index == 0){
+            if (index == 0) {
                 return head;
-            }else if(index == size - 1){
+            } else if (index == size - 1) {
                 return tail;
-            }else if (index < size / 2) {
+            } else if (index < size / 2) {
                 MyDLLNode<E> current = head;
                 for (int i = 0; i < index; i++) {
                     current = current.getNext();
@@ -381,17 +392,16 @@ public class MyDLL<E> implements ListADT<E> {
     /**
      * This method will provide an mono-directional iterator for any of the
      * data structures that are specified in this package.
-     *
+     * <p>
      * This iterator makes a copy of the collection of elements and performs a
      * complete walk through the data structure. Note that the copy must be a
      * deep copy, so methods such as clone() should not be used.
-     *
-     *
      */
     @Override
     public Iterator iterator() {
         return new Iterator<E>() {
             private int index = 0;
+            private MyDLLNode<E> current = head;
 
             /**
              * @return
@@ -410,7 +420,10 @@ public class MyDLL<E> implements ListADT<E> {
                 if (!hasNext()) {
                     throw new NoSuchElementException("There is no next element");
                 } else {
-                    return get(index++);
+                    E data = current.getData();
+                    current = current.getNext();
+                    index++;
+                    return data;
                 }
             }
         };

@@ -120,11 +120,11 @@ public class MyStack<E> implements StackADT<E> {
 	@Override
 	public Iterator<E> iterator() {
 		return new Iterator<E>() {
-			private int index = 0;
+			private int index = myStack.size() - 1;
 
 			@Override
 			public boolean hasNext() {
-				return index < myStack.size();
+				return index > 0;
 			}
 
 			@Override
@@ -132,7 +132,7 @@ public class MyStack<E> implements StackADT<E> {
 				if (!hasNext()) {
 					throw new NoSuchElementException("No more elements");
 				} else {
-					return myStack.get(index++);
+					return myStack.get(index--);
 				}
 			}
 		};

@@ -26,8 +26,6 @@ public class MyQueue<E> implements QueueADT<E>{
     public E dequeue() throws EmptyQueueException {
         if (queue.size() == 0) throw new EmptyQueueException();
         return queue.removeFirst();
-
-
     }
 
     @Override

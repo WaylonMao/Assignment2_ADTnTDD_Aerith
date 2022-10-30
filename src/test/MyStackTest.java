@@ -212,7 +212,7 @@ public class MyStackTest {
 		stack.push(two);
 		stack.push(three);
 		Iterator<Integer> it = stack.iterator();
-		int expected = 1;
+		int expected = 3;
 		int actual = it.next();
 		assertEquals("Iterator is not correct", expected, actual);
 
