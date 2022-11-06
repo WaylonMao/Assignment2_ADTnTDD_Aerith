@@ -5,9 +5,9 @@ import java.util.NoSuchElementException;
 import exceptions.EmptyStackException;
 
 /**
- * Class description:
+ * Class description: this class is the implementation of the MyStack
  * 
- * @author Hu Peng
+ * @author Hoa Le, Weilong Mao, Hu Peng, Chris Wang
  *
  */
 public class MyStack<E> implements StackADT<E> {

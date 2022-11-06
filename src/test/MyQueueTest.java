@@ -1,11 +1,13 @@
 package test;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
 import utilities.Iterator;
 import utilities.MyQueue;
+
+import static org.junit.Assert.*;
 
 /**
  * This class is used to test the MyQueue class.
@@ -21,8 +23,8 @@ public class MyQueueTest<E> {
     private Integer four;
     private Integer five;
 
-    @BeforeEach
-    void setUp() throws Exception {
+    @Before
+    public void setUp() throws Exception {
         queue = new MyQueue<>();
         one = Integer.valueOf(1);
         two = Integer.valueOf(2);
@@ -31,8 +33,8 @@ public class MyQueueTest<E> {
         five = Integer.valueOf(5);
     }
 
-    @AfterEach
-    void tearDown() throws Exception {
+    @After
+    public void tearDown() throws Exception {
         queue = null;
         one = null;
         two = null;
@@ -47,10 +49,10 @@ public class MyQueueTest<E> {
      * Test method for {@link utilities.MyQueue#MyQueue()}.
      */
     @Test
-    void testConstructor() {
+    public void testConstructor() {
         boolean expected = true;
         boolean actual = queue != null;
-        Assertions.assertEquals(expected, actual, "Queue was not created");
+        assertEquals("Queue was not created", expected, actual);
 
     }
 
@@ -58,18 +60,27 @@ public class MyQueueTest<E> {
      * Test method for {@link utilities.MyQueue#enqueue<E>}.
      */
     @Test
-    void testEnqueue() {
+    public void testEnqueue() {
         queue.enqueue(one);
         int expected = queue.peek();
         int actual = one;
-        Assertions.assertEquals(expected, actual);
+        // test if the element is added to the queue
+        assertEquals(expected, actual);
+        // test if the size of the queue is increased
+        assertEquals(1, queue.size());
+        // test null element
+        try {
+            queue.enqueue(null);
+        } catch (NullPointerException e) {
+            assertTrue(true);
+        }
     }
 
     /**
      * Test method for {@link MyQueue#dequeue()}.
      */
     @Test
-    void testDequeue() {
+    public void testDequeue() {
         queue.enqueue(one);
         queue.enqueue(two);
         queue.enqueue(three);
@@ -78,15 +89,27 @@ public class MyQueueTest<E> {
         int expected = queue.dequeue();
         int actual = one;
         int expectedSize = 4;
-        Assertions.assertEquals(expected, actual);
-        Assertions.assertEquals(expectedSize, queue.size());
+        // test if the element is removed from the queue
+        assertEquals(expected, actual);
+        // test if the size of the queue is decreased
+        assertEquals(expectedSize, queue.size());
+        // test empty queue exception
+        try {
+            queue.dequeue();
+            queue.dequeue();
+            queue.dequeue();
+            queue.dequeue();
+            queue.dequeue();
+        } catch (Exception e) {
+            assertTrue(true);
+        }
     }
 
     /**
      * Test method for {@link utilities.MyQueue#peek()}.
      */
     @Test
-    void testPeek() {
+    public void testPeek() {
         queue.enqueue(one);
         queue.enqueue(two);
         queue.enqueue(three);
@@ -94,7 +117,19 @@ public class MyQueueTest<E> {
         queue.enqueue(five);
         int expected = queue.peek();
         int actual = one;
-        Assertions.assertEquals(expected, actual);
+        // test if the element is returned from the queue
+        assertEquals(expected, actual);
+        // test empty queue exception
+        try {
+            queue.dequeue();
+            queue.dequeue();
+            queue.dequeue();
+            queue.dequeue();
+            queue.dequeue();
+            queue.peek();
+        } catch (Exception e) {
+            assertTrue(true);
+        }
 
     }
 
@@ -102,7 +137,7 @@ public class MyQueueTest<E> {
      * Test method for {@link MyQueue#dequeueAll()}.
      */
     @Test
-    void testDequeueAll() {
+    public void testDequeueAll() {
         queue.enqueue(one);
         queue.enqueue(two);
         queue.enqueue(three);
@@ -111,14 +146,14 @@ public class MyQueueTest<E> {
         queue.dequeueAll();
         boolean expected = queue.isEmpty();
         boolean actual = true;
-        Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
 
     /**
      * Test method for {@link utilities.MyQueue#isEmpty()}.
      */
     @Test
-    void testIsEmpty() {
+    public void testIsEmpty() {
         queue.enqueue(one);
         queue.enqueue(two);
         queue.enqueue(three);
@@ -127,7 +162,7 @@ public class MyQueueTest<E> {
         queue.dequeueAll();
         boolean expected = queue.isEmpty();
         boolean actual = true;
-        Assertions.assertEquals(expected, actual);
+       assertEquals(expected, actual);
 
     }
 
@@ -135,7 +170,7 @@ public class MyQueueTest<E> {
      * Test method for {@link utilities.MyQueue#toArray()}.
      */
     @Test
-    void testToArray() {
+    public void testToArray() {
         queue.enqueue(one);
         queue.enqueue(two);
         queue.enqueue(three);
@@ -143,7 +178,14 @@ public class MyQueueTest<E> {
         queue.enqueue(five);
         Object[] expected = queue.toArray();
         Object[] actual = new Object[]{one, two, three, four, five};
-        Assertions.assertArrayEquals(expected, actual);
+        // test if the array is returned
+        assertArrayEquals(expected, actual);
+        // test order of the array
+        assertEquals(expected[0], actual[0]);
+        assertEquals(expected[1], actual[1]);
+        assertEquals(expected[2], actual[2]);
+        assertEquals(expected[3], actual[3]);
+        assertEquals(expected[4], actual[4]);
     }
 
 
@@ -151,7 +193,7 @@ public class MyQueueTest<E> {
      * Test method for {@link utilities.MyQueue#toArray(E[])}.
      */
     @Test
-    void testToArrayEArray() {
+    public void testToArrayEArray() {
         queue.enqueue(one);
         queue.enqueue(two);
         queue.enqueue(three);
@@ -159,7 +201,7 @@ public class MyQueueTest<E> {
         queue.enqueue(five);
         Integer[] expected = queue.toArray(new Integer[queue.size()]);
         Integer[] actual = new Integer[]{one, two, three, four, five};
-        Assertions.assertArrayEquals(expected, actual);
+        assertArrayEquals(expected, actual);
 
     }
 
@@ -168,11 +210,11 @@ public class MyQueueTest<E> {
      * Test method for {@link MyQueue#iterator()}.
      */
     @Test
-    void testIterator() {
+    public void testIterator() {
         Iterator<Integer> iterator = queue.iterator();
         boolean expected = iterator != null;
         boolean actual = true;
-        Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual);
 
 
     }
@@ -181,7 +223,7 @@ public class MyQueueTest<E> {
      * Test method for {@link utilities.MyQueue#size()}.
      */
     @Test
-    void testSize() {
+    public void testSize() {
         queue.enqueue(one);
         queue.enqueue(two);
         queue.enqueue(three);
@@ -189,6 +231,18 @@ public class MyQueueTest<E> {
         queue.enqueue(five);
         int expected = queue.size();
         int actual = 5;
-        Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual);
+    }
+    @Test
+    public  void  testIsFull(){
+        int size = 5;
+        queue.enqueue(one);
+        queue.enqueue(two);
+        queue.enqueue(three);
+        queue.enqueue(four);
+        queue.enqueue(five);
+        boolean expected = queue.isFull();
+        boolean actual = true;
+        assertEquals(expected, actual);
     }
 }
