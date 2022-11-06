@@ -1,6 +1,3 @@
-/**
- * 
- */
 package test;
 
 import static org.junit.Assert.*;
@@ -14,8 +11,9 @@ import utilities.MyDLL;
 
 
 /**
- * @author levan
+ * This class is used to test the MyDLL class.
  *
+ * @author Hoa Le, Weilong Mao, Hu Peng, Chris Wang
  */
 public class MyDLLTests {
 	private MyDLL list;

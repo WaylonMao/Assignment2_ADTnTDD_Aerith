@@ -6,9 +6,24 @@ package xmltools;
  * @author Weilong Mao
  */
 public class XMLTag {
+    /**
+     * The name of the tag.
+     */
     private String tagName;
+
+    /**
+     * The line number of the tag in the XML file.
+     */
     private int lineNum;
+
+    /**
+     * If the tag is closed or open.
+     */
     private boolean isClosingTag;
+
+    /**
+     * If the tag is a self-closing tag.
+     */
     private boolean selfClosing;
 
     /**

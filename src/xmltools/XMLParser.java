@@ -22,23 +22,87 @@ import java.util.Scanner;
  * @author Weilong Mao
  */
 public class XMLParser {
+    /**
+     * The open tag symbol.
+     */
     private static final char OPEN_TAG = '<';
+
+    /**
+     * The close tag symbol.
+     */
     private static final char CLOSE_TAG = '>';
+
+    /**
+     * The slash symbol.
+     */
     private static final char SLASH = '/';
+
+    /**
+     * The space symbol.
+     */
     private static final char SPACE = ' ';
+
+    /**
+     * The question symbol.
+     */
     private static final char QUESTION = '?';
 
+    /**
+     * The path of the XML file.
+     */
     private String xmlFilePath;
+
+    /**
+     * This queue stores all characters of a XML line.
+     */
     private MyQueue<Character> xmlLine;
+
+    /**
+     * This queue stores all xmlLine.
+     */
     private MyQueue<MyQueue<Character>> xmlLines;
+
+    /**
+     * The stack of the XML tag's characters.
+     */
     private MyStack<Character> tagStack;
+
+    /**
+     * The stack of the XML tags.
+     */
     private MyStack<XMLTag> tagsStack;
+
+    /**
+     * The queue of the errors.
+     */
     private MyQueue<XMLTag> errorQueue;
+
+    /**
+     * The queue of the extra tags.
+     */
     private MyQueue<XMLTag> extrasQueue;
 
+    /**
+     * The line number of the XML file.
+     */
     private int lineNum = 1;
+
+    /**
+     * The name of the XML tag.
+     */
     private String tagName = "";
 
+    /**
+     * This is the constructor of the XMLParser class.
+     * It will initialize the queues and stacks.
+     * Then it will call the parse method to parse the XML file.
+     *
+     * pre-condition: The XML file must be existed and in the right format.
+     * post-condition: The XML file will be parsed. If there is any error, it
+     * will be stored in the error queue.
+     *
+     * @param xmlFilePath The path of the XML file.
+     */
     public XMLParser(String xmlFilePath) {
         this.xmlFilePath = xmlFilePath;
         xmlLine = new MyQueue<>();
@@ -52,6 +116,13 @@ public class XMLParser {
         checkError();
     }
 
+     /**
+      * This method is used to get the XML lines from the XML file.
+      *
+      * pre-condition: The XML file must be existed and in the right format.
+      * post-condition: The XML lines will be stored in the xmlLines queue.
+      *
+      */
     private void initialXMLLines() {
         try {
             Scanner scanner = new Scanner(new FileReader(xmlFilePath));
@@ -72,24 +143,40 @@ public class XMLParser {
         }
     }
 
+/**
+     * This method is used to parse the XML file.
+     *
+     * pre-condition: The XML lines are stored in the XMLLines queue.
+     * post-condition: The XML file will be parsed. If there is any error, it
+     * will be stored in the error queue.
+     *
+     */
     private void parserTags() {
 
         boolean foundOpenTag = false;
         this.lineNum = 1;
-        char c = ' ';
+        char c = SPACE;
+
+        // Loop through the XML lines.
         while (!xmlLines.isEmpty()) {
             String line = "";
             boolean error = false;
             xmlLine = xmlLines.dequeue();
             line = xmlLine.toArray().toString();
+
+            // Loop through an XML line.
             while (!xmlLine.isEmpty()) {
+                // Get a character from the XML line.
                 c = xmlLine.dequeue();
+                // Ignore the open tag symbol.
                 if (c == OPEN_TAG) {
                     foundOpenTag = false;
                     tagName = "";
                 }
+                // Looking for close tag symbol. And check if the tagStack is empty.
                 if (c == CLOSE_TAG && !tagStack.isEmpty()) {
                     tagName = c + "";
+                    // Check if the tag is an operation tag.
                     if (tagStack.peek() == QUESTION) {
                         while (!tagStack.isEmpty() && !foundOpenTag) {
                             if (tagStack.peek() == OPEN_TAG) {
@@ -97,12 +184,14 @@ public class XMLParser {
                             }
                             tagName = tagStack.pop() + tagName;
                         }
+                        // Check the tag is correct.
                         if (!foundOpenTag || tagName.charAt(0) != OPEN_TAG
                                 || tagName.charAt(1) != QUESTION
                                 || tagName.charAt(tagName.length() - 2) != QUESTION
                                 || tagName.charAt(tagName.length() - 1) != CLOSE_TAG) {
                             errorQueue.enqueue(new XMLTag(transTagName(tagName), lineNum));
                         }
+                        // Check if the tag is a self-closing tag.
                     } else if (tagStack.peek() == SLASH) {
                         while (!tagStack.isEmpty() && !foundOpenTag) {
                             if (tagStack.peek() == OPEN_TAG) {
@@ -120,6 +209,7 @@ public class XMLParser {
                             tag.setSelfClosing(true);
                             checkParser(tag);
                         }
+                        // Check if the tag is a normal tag.
                     } else {
                         while (!tagStack.isEmpty() && !foundOpenTag) {
                             if (tagStack.peek() == OPEN_TAG) {

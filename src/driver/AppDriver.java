@@ -1,8 +1,7 @@
 package driver;
 
-import utilities.MyQueue;
 import xmltools.XMLParser;
-import xmltools.XMLTag;
+
 
 /**
  * Class description: This class is the driver for the XML Parser.
@@ -12,7 +11,8 @@ import xmltools.XMLTag;
 public class AppDriver {
     public static void main(String[] args) {
         // Change the file name to test different XML files.
-        final String PATH = "D:\\DOCUMENTS\\ITSD\\CPRG311 AOOP\\A02\\sample2.xml";
+        // final String PATH = "res/sample1.xml";
+        final String PATH = "res/sample2.xml";
         System.out.println("Checking XML file: " + PATH);
         XMLParser parser = new XMLParser(PATH);
         System.out.println("Finished.");
@@ -36,6 +36,6 @@ public class AppDriver {
                         "                          \\__(  o     o  )__/\n" +
                         "Team Aerith:\n" +
                         "            Hoa Le, Weilong Mao, Chris Wang, Hu Peng\n" +
-                        "Ver: 2022-10-30");
+                        "Ver: 2022-11-06");
     }
 }

@@ -19,11 +19,9 @@ import utilities.MyStack;
 import utilities.StackADT;
 
 /**
- * Class description:
- * 
- * @author Hu Peng
+ * This class is used to test the MyStack class.
  *
- * 
+ * @author Hoa Le, Weilong Mao, Hu Peng, Chris Wang
  */
 public class MyStackTest {
 

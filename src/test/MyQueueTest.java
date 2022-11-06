@@ -7,12 +7,10 @@ import org.junit.jupiter.api.Test;
 import utilities.Iterator;
 import utilities.MyQueue;
 
-
-
-
 /**
- * @author Chris Wang
- * @date 2022-10-26
+ * This class is used to test the MyQueue class.
+ *
+ * @author Hoa Le, Weilong Mao, Hu Peng, Chris Wang
  */
 public class MyQueueTest<E> {
 

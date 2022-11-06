@@ -427,6 +427,5 @@ public class MyDLL<E> implements ListADT<E> {
                 }
             }
         };
-
     }
 }

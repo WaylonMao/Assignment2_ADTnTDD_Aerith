@@ -1,6 +1,3 @@
-/**
- *
- */
 package test;
 
 import static org.junit.Assert.*;
@@ -12,7 +9,9 @@ import utilities.MyArrayList;
 
 
 /**
- * @author Hoa Le
+ * This class is used to test the MyArrayList class.
+ *
+ * @author Hoa Le, Weilong Mao, Hu Peng, Chris Wang
  */
 public class MyArrayListTest {
 
