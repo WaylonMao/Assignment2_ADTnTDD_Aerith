@@ -11,8 +11,6 @@ import xmltools.XMLParser;
  */
 public class AppDriver {
     public static void main(String[] args) {
-        // Change the file name to test different XML files.
-        // final String PATH = "res/sample1.xml";
         String PATH = args[0];
         System.out.println("Checking XML file: " + PATH);
         long startTime = System.currentTimeMillis();
