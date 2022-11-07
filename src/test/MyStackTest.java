@@ -105,7 +105,7 @@ public class MyStackTest {
 	}
 
 	/**
-	 * Test method for {@link utilities.MyStack#clear()}.
+	 * Test method for {@link utilities.MyStack#clear(), utilities.MyStack#size()}.
 	 */
 	@Test
 	public void testClear() {
@@ -198,14 +198,14 @@ public class MyStackTest {
 		int actual = stack.search(one);
 		int expected = 3;
 		assertEquals(actual, expected);
-
 	}
 
 	/**
-	 * Test method for {@link utilities.MyStack#iterator()}.
+	 * Test method for
+	 * {@link utilities.MyStack#iterator(),utilities.MyStack#iterator().next()}.
 	 */
 	@Test
-	public void testIterator() {
+	public void testIteratorNext() {
 		stack.push(one);
 		stack.push(two);
 		stack.push(three);
@@ -213,7 +213,21 @@ public class MyStackTest {
 		int expected = 3;
 		int actual = it.next();
 		assertEquals("Iterator is not correct", expected, actual);
+	}
 
+	/**
+	 * Test method for
+	 * {@link utilities.MyStack#iterator(),utilities.MyStack#iterator().hasNext()}.
+	 */
+	@Test
+	public void testIteratorHasNext() {
+		stack.push(one);
+		stack.push(two);
+		stack.push(three);
+		Iterator<Integer> it = stack.iterator();
+		boolean expected = true;
+		boolean actual = it.hasNext();
+		assertEquals("Iterator is not correct", expected, actual);
 	}
 
 	/**
@@ -274,7 +288,8 @@ public class MyStackTest {
 	}
 
 	/**
-	 * Test method for {@link exception.EmptyStackException}.
+	 * Test method for {@link exception.EmptyStackException,
+	 * utilities.MyStack#peek()}.
 	 */
 	@Test
 	public void testPeek_EmptyStackException() {
@@ -289,7 +304,8 @@ public class MyStackTest {
 	}
 
 	/**
-	 * Test method for {@link exception.EmptyStackException}.
+	 * Test method for {@link exception.EmptyStackException,
+	 * utilities.MyStack#pop()}.
 	 */
 	@Test
 	public void testPop_EmptyStackException() {
@@ -304,10 +320,10 @@ public class MyStackTest {
 	}
 
 	/**
-	 * Test method for {@link utilities.MyStack#iterator()}.
+	 * Test method for {@link utilities.MyStack#iterator().next()}.
 	 */
 	@Test
-	public void testNoSuchElementException() {
+	public void testIterator_NoSuchElementException() {
 		try {
 			stack.push(one);
 			stack.push(two);
@@ -321,10 +337,10 @@ public class MyStackTest {
 	}
 
 	/**
-	 * Test method for {@link utilities.MyStack#equals(StackADT)}.
+	 * Test method for {@link utilities.MyStack#push(E)}.
 	 */
 	@Test
-	public void testNullPointerException() {
+	public void testPush_NullPointerException() {
 		try {
 			stack.push(null);
 			Assert.fail();
