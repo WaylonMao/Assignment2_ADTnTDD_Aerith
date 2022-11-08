@@ -4,7 +4,7 @@ import xmltools.XMLParser;
 
 
 /**
- * Class description: This class is the driver for the XML Parser.
+ * Class description: This class is the driver for the XML Parser
  *
  * @author Hoa Le, Weilong Mao, Hu Peng, Chris Wang
  *
