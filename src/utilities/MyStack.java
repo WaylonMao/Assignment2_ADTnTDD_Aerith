@@ -29,8 +29,8 @@ public class MyStack<E> implements StackADT<E> {
 	 * Pushes an item onto the top of this stack.
 	 *
 	 * @param toAdd item to be pushed onto the top of the stack.
-	 * @throws NullPointerException when attempting to add a null element to
-	 *                              the stack.
+	 * @throws NullPointerException when attempting to add a null element to the
+	 *                              stack.
 	 */
 	@Override
 	public void push(E toAdd) throws NullPointerException {
@@ -41,12 +41,11 @@ public class MyStack<E> implements StackADT<E> {
 	}
 
 	/**
-	 * Removes the object at the top of this stack and returns that object as
-	 * the value of this function.
+	 * Removes the object at the top of this stack and returns that object as the
+	 * value of this function.
 	 *
 	 * @return the item popped off the top of the stack.
-	 * @throws java.util.EmptyStackException
-	 *             if there are not items in the stack.
+	 * @throws java.util.EmptyStackException if there are not items in the stack.
 	 */
 	@Override
 	public E pop() throws EmptyStackException {
@@ -72,8 +71,8 @@ public class MyStack<E> implements StackADT<E> {
 	}
 
 	/**
-	 * Clears all the items from this Stack. This method returns, unless there
-	 * is an Exception (Runtime) thrown.
+	 * Clears all the items from this Stack. This method returns, unless there is an
+	 * Exception (Runtime) thrown.
 	 */
 	@Override
 	public void clear() {
@@ -105,12 +104,10 @@ public class MyStack<E> implements StackADT<E> {
 	/**
 	 * Returns an array containing all of the elements in this list in proper
 	 * sequence; the runtime type of the returned array is that of the specified
-	 * array. Obeys the general contract of the Collection.toArray(Object[])
-	 * method.
+	 * array. Obeys the general contract of the Collection.toArray(Object[]) method.
 	 *
 	 * @return an array containing the elements of this stack.
-	 * @throws NullPointerException
-	 *             if the specified array is null.
+	 * @throws NullPointerException if the specified array is null.
 	 */
 	@Override
 	public E[] toArray(E[] holder) throws NullPointerException {
@@ -119,15 +116,13 @@ public class MyStack<E> implements StackADT<E> {
 
 	/**
 	 * Returns true if this list contains the specified element. More formally,
-	 * returns true if and only if this list contains at least one element e
-	 * such that (o==null ? e==null : o.equals(e)).
+	 * returns true if and only if this list contains at least one element e such
+	 * that (o==null ? e==null : o.equals(e)).
 	 *
-	 * @param toFind
-	 *            element whose presence in this list is to be tested.
+	 * @param toFind element whose presence in this list is to be tested.
 	 * @return true if this list contains the specified element.
-	 * @throws NullPointerException
-	 *             if the specified element is null and this list does not
-	 *             support null elements.
+	 * @throws NullPointerException if the specified element is null and this list
+	 *                              does not support null elements.
 	 */
 	@Override
 	public boolean contains(E toFind) throws NullPointerException {
@@ -135,17 +130,16 @@ public class MyStack<E> implements StackADT<E> {
 	}
 
 	/**
-	 * Returns the 1-based position where an object is on this stack. If the
-	 * object o occurs as an item in this stack, this method returns the
-	 * distance from the top of the stack of the occurrence nearest the top of
-	 * the stack; the topmost item on the stack is considered to be at distance
-	 * 1. The equals method is used to compare o to the items in this stack.
+	 * Returns the 1-based position where an object is on this stack. If the object
+	 * o occurs as an item in this stack, this method returns the distance from the
+	 * top of the stack of the occurrence nearest the top of the stack; the topmost
+	 * item on the stack is considered to be at distance 1. The equals method is
+	 * used to compare o to the items in this stack.
 	 *
-	 * @param toFind
-	 *            the desired object.
-	 * @return the 1-based position from the top of the stack where the object
-	 *         is located; the return value -1 indicates that the object is not
-	 *         on the stack.
+	 * @param toFind the desired object.
+	 * @return the 1-based position from the top of the stack where the object is
+	 *         located; the return value -1 indicates that the object is not on the
+	 *         stack.
 	 */
 	@Override
 	public int search(E toFind) {
@@ -170,11 +164,23 @@ public class MyStack<E> implements StackADT<E> {
 		return new Iterator<E>() {
 			private int index = myStack.size() - 1;
 
+			/**
+			 * Returns true if the next element of current index exist in the stack .
+			 * 
+			 * @return true if the next element of current index exist in the stack.
+			 */
 			@Override
 			public boolean hasNext() {
 				return index > 0;
 			}
 
+			/**
+			 * Returns the next element of current index in the stack.
+			 * 
+			 * @return the next element of current index in the stack.
+			 * @throws NoSuchElementException if the next element of current index does not
+			 *                                exist, which means the current index is 1.
+			 */
 			@Override
 			public E next() {
 				if (!hasNext()) {
@@ -187,8 +193,8 @@ public class MyStack<E> implements StackADT<E> {
 	}
 
 	/**
-	 * Used to compare two Stack ADT's. To be equal two stacks must contain
-	 * equal items appearing in the same order.
+	 * Used to compare two Stack ADT's. To be equal two stacks must contain equal
+	 * items appearing in the same order.
 	 *
 	 * @param that the Stack ADT to be compared to this stack.
 	 * @return <code>true</code> if the stacks are equal.
@@ -210,6 +216,7 @@ public class MyStack<E> implements StackADT<E> {
 
 	/**
 	 * Returns the depth of the current stack as an integer value.
+	 * 
 	 * @return the current size to the stack as an integer.
 	 */
 	@Override
