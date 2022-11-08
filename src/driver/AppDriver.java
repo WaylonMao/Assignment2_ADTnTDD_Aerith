@@ -14,7 +14,7 @@ public class AppDriver {
         boolean error = false;
         String fileName = args[0];
         if(!fileName.startsWith("-") || fileName.toLowerCase().charAt(1)!= 'f') {
-            System.out.println("Invalid command line argument, the command line argument should be -f<filename>");
+            System.out.println("Invalid command line argument, the command line argument should be -f<FilePath>");
             error = true;
         }
         if (!error) {
