@@ -93,6 +93,11 @@ public class XMLParser {
     private String tagName = "";
 
     /**
+     * The value will be true, if there is an error in the XML file.
+     */
+    private boolean isError = false;
+
+    /**
      * This is the constructor of the XMLParser class.
      * It will initialize the queues and stacks.
      * Then it will call the parse method to parse the XML file.
@@ -114,6 +119,9 @@ public class XMLParser {
         initialXMLLines();
         parserTags();
         checkError();
+        if(!isError) {
+            System.out.println("No error found.");
+        }
     }
 
      /**
@@ -316,6 +324,7 @@ public class XMLParser {
      * @param queue The queue that contains the error.
      */
     private void reportError(MyQueue<XMLTag> queue) {
+        this.isError = true;
         while (!queue.isEmpty()) {
             XMLTag tag = queue.dequeue();
             System.out.println("Error at line " + tag.getLineNum() + ": " + tag.getTagName());

@@ -46,8 +46,11 @@
 
         ***PLEASE PAY ATTENTION TO command line explanation on 6 to key correctly command line ***
 
-8. After running the program, the errors will be displayed on the console if the XML has errors
+8. After running the program, the errors will be displayed on the console if the XML has errors. If the XML file is valid,
 
-   We hope you are enjoying this program.
+        the program will display "No errors found".
 
-   Thank you for your patience to read to the end.
+
+        We hope you are enjoying this program.
+
+        Thank you for your patience to read to the end.
