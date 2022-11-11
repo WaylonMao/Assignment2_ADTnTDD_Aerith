@@ -3,7 +3,7 @@ package xmltools;
 /**
  * Class description: This class holds the information for a single XML tag.
  *
- * @author Weilong Mao
+ * @author Hoa Le, Weilong Mao, Hu Peng, Chris Wang
  */
 public class XMLTag {
     /**

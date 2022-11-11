@@ -1,3 +1,6 @@
+/**
+ * This package contains the driver class for the application.
+ */
 package driver;
 
 import xmltools.XMLParser;
@@ -5,6 +8,7 @@ import xmltools.XMLParser;
 
 /**
  * Class description: This class is the driver for the XML Parser
+ * this class use to test the application and display the result on the screen.
  *
  * @author Hoa Le, Weilong Mao, Hu Peng, Chris Wang
  *
@@ -23,7 +27,7 @@ public class AppDriver {
             long startTime = System.currentTimeMillis();
             XMLParser parser = new XMLParser(path);
             long endTime = System.currentTimeMillis();
-            System.out.println("Finished checking XML file: " + path + " with " + (endTime - startTime) + "ms");
+            System.out.println("Finished checking " + path + " file with " + (endTime - startTime) + "ms.");
             System.out.println(
                     "        _   _         _  _          _   __ _\n" +
                             "       | | | |  ___  | || |  ___   | | / /(_)  _     _\n" +

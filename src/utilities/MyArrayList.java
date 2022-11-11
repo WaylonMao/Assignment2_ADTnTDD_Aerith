@@ -7,16 +7,32 @@ import java.util.Arrays;
 import java.util.NoSuchElementException;
 
 /**
- * This is an ArrayList class for implementing the ListADT interface.
+ * This is MyArrayList class implements from ListADT interface.
  *
- * @param <E>
+ * Class description: This class is the implementation of the MyArrayList
+ *
  * @author Hoa Le, Weilong Mao, Hu Peng, Chris Wang
  */
 public class MyArrayList<E> implements ListADT<E>, Iterator<E> {
+    /**
+     * The size of MyArrayList.
+     */
     private int size;
+    /**
+     * The index of MyArrayList.
+     */
     private int index;
+    /**
+     * The array of MyArrayList.
+     */
     private E[] myArrayList;
+    /**
+     * The default capacity of MyArrayList.
+     */
     private final int DEFAULT_CAPACITY = 10;
+    /**
+     * The capacity of MyArrayList.
+     */
     private int arraySize = DEFAULT_CAPACITY;
 
 
