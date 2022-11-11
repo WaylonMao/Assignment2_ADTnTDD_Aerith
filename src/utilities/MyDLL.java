@@ -1,6 +1,13 @@
 package utilities;
 
 import java.util.NoSuchElementException;
+/**
+ * Class description:   This class is the implementation of the MyDLL
+ *
+ * @author Hoa Le, Weilong Mao, Hu Peng, Chris Wang
+ *
+ *
+ */
 
 public class MyDLL<E> implements ListADT<E> {
     private int size;
@@ -16,7 +23,7 @@ public class MyDLL<E> implements ListADT<E> {
     }
 
     /**
-     * This method is sued to get the size of the DLL
+     * This method is used to get the size of the MyDLL
      */
     @Override
     public int size() {
@@ -24,7 +31,7 @@ public class MyDLL<E> implements ListADT<E> {
     }
 
     /**
-     * This method is used to clear the DLL
+     * This method is used to clear the MyDLL
      */
     @Override
     public void clear() {
@@ -39,7 +46,7 @@ public class MyDLL<E> implements ListADT<E> {
     }
 
     /**
-     * @return
+     * This method is used to check the MyDLL is empty or not
      */
     @Override
     public boolean isEmpty() {
@@ -100,9 +107,9 @@ public class MyDLL<E> implements ListADT<E> {
      *              or at the end if index is equal to the
      *              size (<code>size()</code>).
      * @param toAdd The element to be inserted.
-     * @return
-     * @throws NullPointerException
-     * @throws IndexOutOfBoundsException
+     * @return true if the element was added successfully at the specified index.
+     * @throws NullPointerException if the element is null
+     * @throws IndexOutOfBoundsException if the index is out of range
      */
     @Override
     public boolean add(int index, E toAdd) throws NullPointerException, IndexOutOfBoundsException {
@@ -130,9 +137,10 @@ public class MyDLL<E> implements ListADT<E> {
     }
 
     /**
+     * Method uses to add an element to the end of the list
      * @param toAdd Element to be appended to this list.
-     * @return
-     * @throws NullPointerException
+     * @return true if the element was added successfully
+     * @throws NullPointerException if the element is null
      */
     @Override
     public boolean add(E toAdd) throws NullPointerException {
@@ -146,9 +154,10 @@ public class MyDLL<E> implements ListADT<E> {
 
 
     /**
+     * Method uses to add all elements of the specified collection to the end of this list.
      * @param toAdd The new sub list to be added.
-     * @return
-     * @throws NullPointerException
+     * @return true if the elements were added successfully
+     * @throws NullPointerException if the element is null
      */
     @Override
     public boolean addAll(ListADT<? extends E> toAdd) throws NullPointerException {
@@ -163,9 +172,10 @@ public class MyDLL<E> implements ListADT<E> {
     }
 
     /**
+     * Method uses to get the element at the specified index.
      * @param index Index of element to return.
-     * @return
-     * @throws IndexOutOfBoundsException
+     * @return The element at the specified index.
+     * @throws IndexOutOfBoundsException if the index is out of range
      */
     @Override
     public E get(int index) throws IndexOutOfBoundsException {
@@ -182,7 +192,7 @@ public class MyDLL<E> implements ListADT<E> {
      *
      * @param index The index of the element to remove.
      * @return the element that was removed from the list.
-     * @throws IndexOutOfBoundsException
+     * @throws IndexOutOfBoundsException if the index is out of range
      */
     @Override
     public E remove(int index) throws IndexOutOfBoundsException {
@@ -270,11 +280,12 @@ public class MyDLL<E> implements ListADT<E> {
     }
 
     /**
+     * Method uses to set the element at the specified index.
      * @param index    The index of the element to replace.
      * @param toChange Element to be stored at the specified position.
-     * @return
-     * @throws NullPointerException
-     * @throws IndexOutOfBoundsException
+     * @return the element previously at the specified position.
+     * @throws NullPointerException    if the element is null
+     * @throws IndexOutOfBoundsException    if the index is out of range
      */
     @Override
     public E set(int index, E toChange) throws NullPointerException, IndexOutOfBoundsException {
@@ -404,7 +415,8 @@ public class MyDLL<E> implements ListADT<E> {
             private MyDLLNode<E> current = head;
 
             /**
-             * @return
+             * This method is used to check if there is a next element in the DLL
+             * @return true if there is a next element in the DLL
              */
             @Override
             public boolean hasNext() {
@@ -412,8 +424,10 @@ public class MyDLL<E> implements ListADT<E> {
             }
 
             /**
-             * @return
-             * @throws NoSuchElementException
+             * This method is used to get the next element in the DLL
+             * @return the next element in the DLL
+             *
+             * @throws NoSuchElementException if there is no next element in the DLL
              */
             @Override
             public E next() {
