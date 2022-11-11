@@ -4,7 +4,7 @@
    into the console. The application uses Stack and Queue that build from our design without using
    Java API.
 
-3. Date completed: November 10, 2022
+3. Date completed: November 11, 2022
 
 4. Author: Weilong Mao, Hoa Le, Chris Wang, Hu Peng
 

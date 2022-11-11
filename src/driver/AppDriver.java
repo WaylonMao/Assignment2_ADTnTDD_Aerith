@@ -48,7 +48,7 @@ public class AppDriver {
                             "                          \\__(  o     o  )__/\n" +
                             "Team Aerith:\n" +
                             "            Hoa Le, Weilong Mao, Chris Wang, Hu Peng\n" +
-                            "Ver: 2022-11-06");
+                            "Ver: 2022-11-11");
         }
 
     }
