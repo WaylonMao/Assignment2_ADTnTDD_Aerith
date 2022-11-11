@@ -138,12 +138,12 @@ public class XMLParser {
             }
             scanner.close();
         } catch (FileNotFoundException e) {
-            System.out.println("File not found!");
+            System.out.println("File is not found!");
             e.printStackTrace();
         }
     }
 
-/**
+    /**
      * This method is used to parse the XML file.
      *
      * pre-condition: The XML lines are stored in the XMLLines queue.
@@ -157,7 +157,7 @@ public class XMLParser {
         this.lineNum = 1;
         char c = SPACE;
 
-        // Loop through the XML lines.
+        // Loop through the XML lines and add the characters from the XML lines to xmlLine queue.
         while (!xmlLines.isEmpty()) {
             String line = "";
             boolean error = false;
@@ -234,7 +234,15 @@ public class XMLParser {
 
         }
     }
-
+    /**
+     * This method is used to check if the tag is correct.
+     *
+     * pre-condition: The XML file must be existed and in the right format.
+     * post-condition: The XML file will be parsed. If there is any error, it
+     * will be stored in the error queue.
+     *
+     * @param tag The XML tag.
+     */
     private void checkParser(XMLTag tag) {
         if (tag.isSelfClosing()) {
             return;
@@ -271,7 +279,16 @@ public class XMLParser {
             tagsStack.push(tag);
         }
     }
-
+    /**
+     * This method is used to transform the tag name.
+     *
+     * pre-condition: The XML file must be existed and in the right format.
+     * post-condition: The XML file will be parsed. If there is any error, it
+     * will be stored in the error queue.
+     *
+     *
+     * @return The transformed tag name.
+     */
     private void checkError() {
         while (!tagsStack.isEmpty()) {
             errorQueue.enqueue(tagsStack.pop());
@@ -294,6 +311,10 @@ public class XMLParser {
         }
     }
 
+    /**
+     * This method is used to report the error.
+     * @param queue The queue that contains the error.
+     */
     private void reportError(MyQueue<XMLTag> queue) {
         while (!queue.isEmpty()) {
             XMLTag tag = queue.dequeue();
@@ -313,6 +334,12 @@ public class XMLParser {
         return errorQueue;
     }
 
+    /**
+     * This method is used to transform the tag name.
+     * @param tagName The tag name.
+     *
+     * @return  the transformed tag name.
+     */
     private String transTagName(String tagName) {
         if (tagName.length() <= 1) {
             return tagName;

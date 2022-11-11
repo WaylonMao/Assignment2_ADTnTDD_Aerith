@@ -10,8 +10,17 @@ import java.util.NoSuchElementException;
  */
 
 public class MyDLL<E> implements ListADT<E> {
+    /**
+     * The size of MyDLL
+     */
     private int size;
+    /**
+     * The head of MyDLL
+     */
     private MyDLLNode<E> head;
+    /**
+     * The tail of MyDLL
+     */
     private MyDLLNode<E> tail;
 
     /**

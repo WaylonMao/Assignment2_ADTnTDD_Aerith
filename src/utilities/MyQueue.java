@@ -12,7 +12,13 @@ import exceptions.EmptyQueueException;
 public class MyQueue<E> implements QueueADT<E>{
 
     private static final long serialVersionUID = 1L;
+    /**
+     * The size of the queue
+     */
     private int size;
+    /**
+     * Create a new MyQueue object
+     */
     private MyDLL<E> queue;
 
     /**
